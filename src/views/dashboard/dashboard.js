@@ -8,6 +8,9 @@ import Leagues from "../leagues/leagues";
 import Coach from "../coach/coach";
 import Seasons from "../seasons/seasons";
 import useStyles from "./dashboardStyle";
+
+//
+import Login from "../Login"; 
 /*
    
 */
@@ -39,6 +42,13 @@ export default function Dashboard() {
             <Route path="/seasons">
               <Seasons />
             </Route>
+
+
+            {/* //////////////////// */}
+            <Route path="/login">
+              <Login />
+            </Route>
+
           </Switch>
         </main>
       </Router>
