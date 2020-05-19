@@ -1,0 +1,47 @@
+
+  form{
+      margin-top: 10%;
+      width: 35%;
+      margin-left: 35%;
+
+  }
+  input[type=submit], button{
+    background-color: rgb(107, 107, 107);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    /* margin-left: 25%; */
+    width: 100%;
+    
+    }
+
+    input[type=text],input[type=password], input[type=email], input[type=date]{
+    background-color: aliceblue(107, 107, 107);
+    width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* margin-top: 6px; */
+    margin-bottom: 16px;
+    resize: vertical;
+    }
+
+    
+    label{
+      margin-top: 10px;
+      
+      /* margin-left: 25%; */
+    }
+
+  /* lable errors */
+  .error {
+    color: red;
+  }
+  
+  label.error {
+    display: inline;
+  }
