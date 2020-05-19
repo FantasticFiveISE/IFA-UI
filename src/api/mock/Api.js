@@ -1,31 +1,39 @@
-import loginResponse from "./mock/resources/loginResponse";
+import loginResponse from "./resources/loginResponse";
+import teamsResponse from "./resources/teamsResponse";
 
-export default function API() {
-  const ENDPOINT = "localhost:8080";
+export default class API {
+  ENDPOINT = "localhost:8080";
 
   // Auth API
-  const login = async () => {
+  login = async () => {
     const res = await setTimeout(() => {
       return loginResponse;
     }, 200);
     return res;
   };
-  const logout = () => {
+  logout = () => {
     // POST to /logout with username?
   };
-  const resigter = () => {
+  resigter = () => {
     // POST to /register with all things
   };
 
   // Teams API
-  const getAllTeams = () => {};
-  const createTeam = () => {};
+  getAllTeams = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(teamsResponse);
+      }, 200);
+    });
+  };
+
+  createTeam = () => {};
 
   // Leagues API
-  const getLeagues = () => {};
-  const updateLeague = () => {};
+  getLeagues = () => {};
+  updateLeague = () => {};
 
   // Games API
-  const getGames = () => {};
-  const updateGame = () => {};
+  getGames = () => {};
+  updateGame = () => {};
 }
