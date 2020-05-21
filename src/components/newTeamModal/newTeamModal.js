@@ -21,6 +21,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
+    marginTop: 200,
     width: 400,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
@@ -41,7 +42,7 @@ export default function CreateTeamModal(props) {
   );
 
   return (
-    <Modal
+    <Modal style={{'max-height': 'calc(100vh - 210px)', 'overflow-y': 'auto'}}
     open={props.open}
     aria-labelledby="simple-modal-title"
     aria-describedby="simple-modal-description"

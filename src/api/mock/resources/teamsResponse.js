@@ -5,7 +5,7 @@ export default [
     fields: ["Test field"],
     players: [{name: "Naor"}, {name: "Noga"}],
     coaches: [],
-    managers: [{name: "Mohsan"}],
+    managers: [{name: "Mohsen"}],
     owners: ["user"],
     teamStatus: "Open",
   },
