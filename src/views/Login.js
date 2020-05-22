@@ -15,18 +15,18 @@ export default function Login() {
 
   // validation of the form + submit is pressed
   function handleSubmit(event) {
-    if(!(user.length > 0 
-      && password.length > 0 
-      && Response.userName === user 
-      && Response.password === password)){
+    if (!(user.length > 0
+      && password.length > 0
+      && Response.userName === user
+      && Response.password === password)) {
 
       alert('Worng');
-    }else{
+    } else {
       event.preventDefault();
       console.log("Sent !!!!!!!!!!!!!!!! ");
-  
+
       //TODO: change acoording to the user 
-      let path = user; 
+      let path = user;
       history.push(path);
     }
   }
@@ -51,7 +51,7 @@ export default function Login() {
             type="password"
           />
         </FormGroup>
-        <Button block bsSize="large"  type="submit">
+        <Button block bsSize="large" type="submit">
           Login
         </Button>
       </form>

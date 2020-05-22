@@ -13,7 +13,7 @@ export default class API {
   };
   logout = () => {
     // POST to /logout with username?
-  };
+  };//
   resigter = () => {
     // POST to /register with all things
   };
