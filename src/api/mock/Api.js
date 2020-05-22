@@ -7,10 +7,16 @@ export default class API {
 
   // Auth API
   login = async () => {
-    const res = await setTimeout(() => {
-      return loginResponse;
-    }, 200);
-    return res;
+    // const res = await setTimeout(() => {
+    //   return loginResponse;
+    // }, 200);
+    // return res;
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(loginResponse);
+      }, 200);
+    });
   };
   logout = () => {
     // POST to /logout with username?

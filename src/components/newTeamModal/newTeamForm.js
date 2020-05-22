@@ -5,18 +5,18 @@ import {Form, Row, Col,  Modal, Button, FormGroup, FormControl, ControlLabel } f
 import BootstrapTable from 'react-bootstrap-table-next';
 import { Input } from "@material-ui/core";
 import  { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 
 //Bugs to FIX: 
-// 1. scroll bar + modal size
-// 2. get content from API correctly (Already have the code)
-// 3. lines 54-63 and line 69 change from team to players/coaches/fields
+// 1. scroll bar 
+// 2. use the data we got from the user + redirect! 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    overflow: "auto",
+    // display: "flex",
+    // flexWrap: "wrap",
+    // overflow: "auto",
   },
   margin: {
     margin: theme.spacing(1),
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 /////
 export default function NewTeamForm() {
   const classes = useStyles();
+  const history = useHistory();
 
   // ----------------------------------- Final values Choosen by the user -----------------------------
   const values ={
@@ -119,6 +120,8 @@ export default function NewTeamForm() {
   };
 
 
+  //TODO: instead of Alert -> Post request with new team details!
+  //TODO: history?
   const handleSubmit = (event) =>{
     if(event.target.name === 'add'){
       alert("Team Name: "+ values.teamName + " | Players:" + values.players+
@@ -126,7 +129,7 @@ export default function NewTeamForm() {
     }else{
       return <Redirect to='/login'  />
     }
-   
+    history.goBack();
     event.preventDefault();
     // redirect to other page + send POST REQUEST 
   }
@@ -168,7 +171,7 @@ export default function NewTeamForm() {
             );
           })}
         <Button block bsSize="large" name="add" type="submit" onClick={handleSubmit}>
-             Add Team
+             Create Team
            </Button>
       </div>
   );
