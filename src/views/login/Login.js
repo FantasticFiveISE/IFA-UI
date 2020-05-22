@@ -3,7 +3,6 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import Response from "../../api/mock/resources/loginResponse";
 import { AuthContext } from "../../providers/authProvider";
-import loginResponse from "../../api/mock/resources/loginResponse";
 import { useHistory } from "react-router-dom";
 import API from "../../api/mock/Api";
 
