@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Menu from "../../components/menu/menu";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
@@ -8,16 +8,17 @@ import Leagues from "../leagues/leagues";
 import Coach from "../coach/coach";
 import Seasons from "../seasons/seasons";
 import useStyles from "./dashboardStyle";
+import Link from "@material-ui/core/Link";
+import { AuthContext } from "../../providers/authProvider";
 
 //
-import Login from "../Login"; 
-/*
-   
-*/
+import Login from "../login/Login";
+
 const hist = createBrowserHistory();
 
 export default function Dashboard() {
   const classes = useStyles();
+  const authContext = useContext(AuthContext);
 
   return (
     <div className={classes.root}>
@@ -25,6 +26,19 @@ export default function Dashboard() {
         <nav className={classes.drawer} aria-label="mailbox folders">
           <Menu />
         </nav>
+        {authContext.state.user || hist.location.pathname === "/login" ? null : (
+          <div className={classes.login}>
+            <Link href="/login">Login</Link>
+          </div>
+        )}
+        {authContext.state.user ? (
+          <div className={classes.login}>
+            Hello {authContext.state.user.name}, {"   "}
+            <Link onClick={() => {}}>
+              Logout
+            </Link>
+          </div>
+        ) : null}
         <main className={classes.content}>
           <Switch>
             <Route path="/teams">
@@ -42,13 +56,9 @@ export default function Dashboard() {
             <Route path="/seasons">
               <Seasons />
             </Route>
-
-
-            {/* //////////////////// */}
             <Route path="/login">
               <Login />
             </Route>
-
           </Switch>
         </main>
       </Router>

@@ -1,34 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import "../views/Login.css";
-import Response from '../api/mock/resources/loginResponse'
+import "./Login.css";
+import Response from "../../api/mock/resources/loginResponse";
+import { AuthContext } from "../../providers/authProvider";
+import loginResponse from "../../api/mock/resources/loginResponse";
 import { useHistory } from "react-router-dom";
-
-
-
+import API from "../../api/mock/Api";
 
 export default function Login() {
-
+  const authContext = useContext(AuthContext);
+  const history = useHistory(); // using the
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
-  const history = useHistory(); // using the 
 
   // validation of the form + submit is pressed
   function handleSubmit(event) {
-    if (!(user.length > 0
-      && password.length > 0
-      && Response.userName === user
-      && Response.password === password)) {
-
-      alert('Worng');
-    } else {
-      event.preventDefault();
-      console.log("Sent !!!!!!!!!!!!!!!! ");
-
-      //TODO: change acoording to the user 
-      let path = user;
-      history.push(path);
-    }
+    // TODO: validate inputes + think about some spinner until we get response
+    event.preventDefault();
+    API.login(Response.userName, Response.password)
+      .then((user) => {
+        console.log("user", JSON.stringify(user));
+        authContext.setState({ user: user });
+        history.push("/");
+      })
+      .catch((error) => console.log(error)); // TODO: Handle errors
   }
 
   return (
@@ -40,14 +35,14 @@ export default function Login() {
             autoFocus
             type="text"
             value={user}
-            onChange={e => setUser(e.target.value)}
+            onChange={(e) => setUser(e.target.value)}
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <ControlLabel>Password</ControlLabel>
           <FormControl
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
         </FormGroup>

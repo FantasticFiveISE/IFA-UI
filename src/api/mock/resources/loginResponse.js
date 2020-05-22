@@ -2,7 +2,7 @@ export default {
   connected: true,
   userName: "shaked",
   password: "1234",
-  name: null,
+  name: "Shaked zrihen",
   roles: {
     TEAM_OWNER: {
       userName: "shaked",

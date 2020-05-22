@@ -11,7 +11,7 @@ const getGeustList = () => {
   return (
     <List>
       {/* /////////////////////// */}
-      {["Teams", "Players", "Coach", "Leagues", "Seasons", "Login"].map(
+      {["Teams", "Players", "Coach", "Leagues", "Seasons"].map(
         (text, index) => (
           <ListItem button key={text} component={Link} to={"/" + text}>
             <ListItemText primary={text} />

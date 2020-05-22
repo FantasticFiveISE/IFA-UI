@@ -21,7 +21,7 @@ export default function () {
   const [createTeamOpen, setOpen] = useState(false);
 
   const getTeams = async () => {
-    const response = await new API().getAllTeams();
+    const response = await API.getAllTeams();
     setTeams(response);
   };
 
