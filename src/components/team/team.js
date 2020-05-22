@@ -72,7 +72,7 @@ export default function Team(props) {
           <div className={classes.contentCol}>
             <div className={classes.catagory}>
               <PlaceIcon />
-              <p className={classes.catagoryUl}>{props.stadium}</p>
+              <p className={classes.catagoryUl}>{props.stadium.fieldName}</p>
             </div>
           </div>
         </div>

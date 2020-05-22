@@ -40,28 +40,29 @@ export default function () {
   return teams.length < 0 ? (
     <div>in Teams</div>
   ) : (
-    <div>
-      <ul>
-        {teams.map((team) => {
-          console.log(team);
-          return (
-            <Team
-              key={team.teamName}
-              teamName={team.teamName}
-              teamStatus={team.teamStatus}
-              players={team.players}
-              managers={team.managers}
-              stadium={team.stadium}
-            />
-          );
-        })}
-      </ul>
-      <div className={classes.createTeam}>
-        <Fab color="secondary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
+      <div>
+        <ul>
+          {teams.map((team) => {
+            console.log(team);
+            return (
+              <Team
+                key={team.teamName}
+                teamName={team.teamName}
+                teamStatus={team.teamStatus}
+                players={team.players}
+                managers={team.managers}
+                stadium={team.stadium}
+                gameEvents={team.gameEvents}
+              />
+            );
+          })}
+        </ul>
+        <div className={classes.createTeam}>
+          <Fab color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
+        </div>
+        <CreateTeamModal open={createTeamOpen} />
       </div>
-      <CreateTeamModal open={createTeamOpen}/>
-    </div>
-  );
+    );
 }

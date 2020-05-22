@@ -1,5 +1,7 @@
 import loginResponse from "./resources/loginResponse";
 import teamsResponse from "./resources/teamsResponse";
+import gamesResponse from "./resources/gameResponse";
+
 
 export default class API {
   ENDPOINT = "localhost:8080";
@@ -34,6 +36,12 @@ export default class API {
   updateLeague = () => {};
 
   // Games API
-  getGames = () => {};
+  getRefereeGames = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(gamesResponse);
+      }, 200);
+    });
+  };
   updateGame = () => {};
 }
