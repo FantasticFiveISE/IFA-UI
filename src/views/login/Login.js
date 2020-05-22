@@ -15,12 +15,13 @@ export default function Login() {
 
   // validation of the form + submit is pressed
   function handleSubmit(event) {
-    // TODO: validate inputes + think about some spinner until we get response
-    event.preventDefault();
+    // TODO: validate inputes
+    event.preventDefault();    
+    authContext.setState({ isLoading: true });
     API.login(Response.userName, Response.password)
       .then((user) => {
         console.log("user", JSON.stringify(user));
-        authContext.setState({ user: user });
+        authContext.setState({ user: user, isLoading: false });
         history.push("/");
       })
       .catch((error) => console.log(error)); // TODO: Handle errors

@@ -1,27 +1,24 @@
 import React from 'react'
 
-const sleep = time => new Promise(resolve => setTimeout(resolve, time));
-
-const getUser = () => sleep(0).then(() => ({username: 'elmo'}));
-
 export const AuthContext = React.createContext();
 
 function AuthProvider({children}) {
   const [state, setState] = React.useState({
+    isLoading: false,
     error: null,
     user: null,
   })
 
   return (
     <AuthContext.Provider value={{state, setState}}>
-      { state.status === 'error' ? (
+      { state.error != null ? (
         <div>
           Oh no
           <div>
             <pre>{state.error.message}</pre>
           </div>
         </div>
-      ) : (
+      ) : state.isLoading? <div>Loading...</div> :(  //think about some nice spinner until we get response
         children
       )}
     </AuthContext.Provider>
