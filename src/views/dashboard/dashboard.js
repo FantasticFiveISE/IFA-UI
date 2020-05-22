@@ -10,8 +10,6 @@ import Seasons from "../seasons/seasons";
 import useStyles from "./dashboardStyle";
 import Link from "@material-ui/core/Link";
 import { AuthContext } from "../../providers/authProvider";
-
-//
 import Login from "../login/Login";
 
 const hist = createBrowserHistory();
@@ -26,7 +24,8 @@ export default function Dashboard() {
         <nav className={classes.drawer} aria-label="mailbox folders">
           <Menu />
         </nav>
-        {authContext.state.user || hist.location.pathname === "/login" ? null : (
+        {authContext.state.user ||
+        hist.location.pathname === "/login" ? null : (
           <div className={classes.login}>
             <Link href="/login">Login</Link>
           </div>
@@ -34,7 +33,11 @@ export default function Dashboard() {
         {authContext.state.user ? (
           <div className={classes.login}>
             Hello {authContext.state.user.name}, {"   "}
-            <Link onClick={() => {}}>
+            <Link
+              onClick={() => {
+                authContext.setState({ user: null });
+              }}
+            >
               Logout
             </Link>
           </div>

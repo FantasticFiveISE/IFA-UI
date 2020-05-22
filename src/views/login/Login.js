@@ -17,7 +17,7 @@ export default function Login() {
     // TODO: validate inputes
     event.preventDefault();    
     authContext.setState({ isLoading: true });
-    API.login(Response.userName, Response.password)
+    API.login(Response.username, Response.password)
       .then((user) => {
         console.log("user", JSON.stringify(user));
         authContext.setState({ user: user, isLoading: false });

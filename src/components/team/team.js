@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,11 +7,10 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import WorkIcon from "@material-ui/icons/Work";
 import PlaceIcon from "@material-ui/icons/Place";
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import useStyles from "./teamStyle";
-
-
+import { AuthContext } from "../../providers/authProvider";
 
 export default function Team(props) {
   const classes = useStyles();
@@ -26,7 +25,6 @@ export default function Team(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

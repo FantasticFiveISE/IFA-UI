@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import API from "../../api/mock/Api";
 import Team from "../../components/team/team";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import { makeStyles } from "@material-ui/core/styles";
-import CreateTeamModal from '../../components/newTeamModal/newTeamModal';
+import CreateTeamModal from "../../components/newTeamModal/newTeamModal";
+import { AuthContext } from "../../providers/authProvider";
 
 const useStyles = makeStyles((theme) => ({
   createTeam: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function () {
   const classes = useStyles();
+  const authContext = useContext(AuthContext);
 
   const [teams, setTeams] = useState([]);
   const [createTeamOpen, setOpen] = useState(false);
@@ -56,12 +58,15 @@ export default function () {
           );
         })}
       </ul>
-      <div className={classes.createTeam}>
-        <Fab color="secondary" aria-label="add" onClick={handleOpen}>
-          <AddIcon />
-        </Fab>
-      </div>
-      <CreateTeamModal open={createTeamOpen}/>
+      {authContext.state.user &&
+      authContext.state.user.roles.indexOf("FAN") >= 0? (
+        <div className={classes.createTeam}>
+          <Fab color="secondary" aria-label="add" onClick={handleOpen}>
+            <AddIcon />
+          </Fab>
+        </div>
+      ) : null}
+      <CreateTeamModal open={createTeamOpen} />
     </div>
   );
 }
