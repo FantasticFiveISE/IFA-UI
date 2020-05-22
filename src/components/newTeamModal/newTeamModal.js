@@ -42,7 +42,7 @@ export default function CreateTeamModal(props) {
   );
 
   return (
-    <Modal style={{'max-height': 'calc(100vh - 210px)', 'overflow-y': 'auto'}}
+    <Modal style={{'maxHeight': 'calc(100vh - 210px)', 'overflowY': 'auto'}}
     open={props.open}
     aria-labelledby="simple-modal-title"
     aria-describedby="simple-modal-description"
