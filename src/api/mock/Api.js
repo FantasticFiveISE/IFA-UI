@@ -66,16 +66,34 @@ class API {
     if (params.available) {  
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(playersResponse);
+          resolve(coachesResponse);
         }, 200);
       });
     } else {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(playersResponse);
+          resolve(coachesResponse);
         }, 200);
       });
     }
   };
+
+  getFields = async (params) => {
+    // Need to filter by params in better way
+    if (params.available) {  
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(FieldsResponse);
+        }, 200);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(FieldsResponse);
+        }, 200);
+      });
+    }
+  };
+
 }
 export default new API();
