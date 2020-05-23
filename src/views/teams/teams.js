@@ -58,15 +58,15 @@ export default function () {
           );
         })}
       </ul>
-      {authContext.state.user &&
-      authContext.state.user.roles.indexOf("FAN") >= 0? (
+      {(authContext.state.user &&
+      authContext.state.user.roles.indexOf("FAN") >= 0) || true? (
         <div className={classes.createTeam}>
           <Fab color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
         </div>
       ) : null}
-      <CreateTeamModal open={createTeamOpen} />
+      <CreateTeamModal open={createTeamOpen} close={handleClose} />
     </div>
   );
 }

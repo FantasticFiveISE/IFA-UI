@@ -1,0 +1,32 @@
+export default [
+  {
+    name: "Naor",
+    userName: "testPlayer",
+    mail: "testPlayer@gmail.com",
+    alertsMessages: [],
+    currentTeam: null,
+    birthDate: "2020-05-22T19:55:54.313+0000",
+    position: "testPosition",
+    squadNumber: "5",
+  },
+  {
+    name: "Noga",
+    userName: "testPlayer2",
+    mail: "testPlayer@gmail.com",
+    alertsMessages: [],
+    currentTeam: null,
+    birthDate: "2020-05-22T19:55:54.313+0000",
+    position: "testPosition",
+    squadNumber: "5",
+  },
+  {
+    name: "Mohsen",
+    userName: "testPlayer",
+    mail: "testPlayer@gmail.com",
+    alertsMessages: [],
+    currentTeam: null,
+    birthDate: "2020-05-22T19:55:54.313+0000",
+    position: "testPosition",
+    squadNumber: "5",
+  },
+];
