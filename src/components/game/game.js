@@ -51,14 +51,14 @@ export default function Game(props) {
           <div className={classes.contentCol}>
             <div className={classes.catagory}>
               <SportsSoccerIcon />
-              <p className={classes.catagoryUl}>{props.hostTeam.teamName}</p>
-              <p className={classes.catagoryUl}>{props.guestTeam.teamName}</p>
+              <p className={classes.catagoryUl}>{props.hostTeam} -</p>
+              <p className={classes.catagoryUl}>{props.guestTeam}</p>
             </div>
             <div className={classes.catagory}>
               <EmojiFlagsIcon />
               <ul className={classes.catagoryUl}>
                 {props.referees.map((referee) => (
-                  <li key={referee.name} className={classes.catagoryLi}>
+                  <li key={referee.userName} className={classes.catagoryLi}>
                     {referee.name}
                   </li>
                 ))}
@@ -69,7 +69,7 @@ export default function Game(props) {
               <ul className={classes.catagoryUl}>
                 {props.gameEvents.map((event) => (
                   <li key={event.id} className={classes.catagoryLi}>
-                    {referee.id}, {referee.dateTime}, {referee.gameMinutes}, {referee.eventName}, {referee.description}
+                    {event.id}, {event.dateTime.replace('T',' ')}, {event.gameMinutes}, {event.eventName}, {event.description}
                   </li>
                 ))}
               </ul>
@@ -78,7 +78,7 @@ export default function Game(props) {
           <div className={classes.contentCol}>
             <div className={classes.catagory}>
               <PlaceIcon />
-              <p className={classes.catagoryUl}>{props.field}</p>
+              <p className={classes.catagoryUl}>{props.field.fieldName}</p>
             </div>
             <div className={classes.catagory}>
               <ScheduleIcon />

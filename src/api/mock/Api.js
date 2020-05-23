@@ -3,6 +3,8 @@ import teamsResponse from "./resources/teamsResponse";
 import playersResponse from "./resources/playersResponse";
 import coachesResponse from "./resources/coachesResponse";
 import fieldsResponse from "./resources/fieldsResponse";
+import gameResponse from "./resources/gameResponse";
+
 
 class API {
   ENDPOINT = "localhost:8080";
@@ -39,7 +41,13 @@ class API {
   updateLeague = () => {};
 
   // Games API
-  getGames = () => {};
+  getRefereeGames = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(gameResponse);
+      }, 200);
+    });
+  };
   updateGame = () => {};
 
   // players Api

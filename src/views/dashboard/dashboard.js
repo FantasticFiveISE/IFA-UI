@@ -7,6 +7,7 @@ import Players from "../players/players";
 import Leagues from "../leagues/leagues";
 import Coach from "../coach/coach";
 import Seasons from "../seasons/seasons";
+import Games from "../games/games";
 import useStyles from "./dashboardStyle";
 import Link from "@material-ui/core/Link";
 import { AuthContext } from "../../providers/authProvider";
@@ -58,6 +59,9 @@ export default function Dashboard() {
             </Route>
             <Route path="/seasons">
               <Seasons />
+            </Route>
+            <Route path="/games">
+              <Games />
             </Route>
             <Route path="/login">
               <Login />
