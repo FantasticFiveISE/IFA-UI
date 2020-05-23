@@ -7,7 +7,11 @@ import Players from "../players/players";
 import Leagues from "../leagues/leagues";
 import Coach from "../coach/coach";
 import Seasons from "../seasons/seasons";
+import Games from "../games/games";
 import useStyles from "./dashboardStyle";
+
+//
+import Login from "../Login"; 
 /*
    
 */
@@ -39,6 +43,15 @@ export default function Dashboard() {
             <Route path="/seasons">
               <Seasons />
             </Route>
+            <Route path="/games">
+              <Games />
+            </Route>
+
+            {/* //////////////////// */}
+            <Route path="/login">
+              <Login />
+            </Route>
+
           </Switch>
         </main>
       </Router>
