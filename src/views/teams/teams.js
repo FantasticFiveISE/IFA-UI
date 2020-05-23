@@ -42,25 +42,6 @@ export default function () {
   return teams.length < 0 ? (
     <div>in Teams</div>
   ) : (
-<<<<<<< HEAD
-      <div>
-        <ul>
-          {teams.map((team) => {
-            console.log(team);
-            return (
-              <Team
-                key={team.teamName}
-                teamName={team.teamName}
-                teamStatus={team.teamStatus}
-                players={team.players}
-                managers={team.managers}
-                stadium={team.stadium}
-                gameEvents={team.gameEvents}
-              />
-            );
-          })}
-        </ul>
-=======
     <div>
       <ul>
         {teams.map((team) => {
@@ -79,20 +60,13 @@ export default function () {
       </ul>
       {(authContext.state.user &&
       authContext.state.user.roles.indexOf("FAN") >= 0) || true? (
->>>>>>> origin/implement-teams-scenario
         <div className={classes.createTeam}>
           <Fab color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
         </div>
-<<<<<<< HEAD
-        <CreateTeamModal open={createTeamOpen} />
-      </div>
-    );
-=======
       ) : null}
       <CreateTeamModal open={createTeamOpen} close={handleClose} />
     </div>
   );
->>>>>>> origin/implement-teams-scenario
 }

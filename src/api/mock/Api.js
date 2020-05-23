@@ -1,14 +1,9 @@
 import loginResponse from "./resources/loginResponse";
 import teamsResponse from "./resources/teamsResponse";
-<<<<<<< HEAD
+import playersResponse from "./resources/playersResponse";
 import gamesResponse from "./resources/gameResponse";
 
-
-export default class API {
-=======
-import playersResponse from "./resources/playersResponse";
 class API {
->>>>>>> origin/implement-teams-scenario
   ENDPOINT = "localhost:8080";
 
   // Auth API

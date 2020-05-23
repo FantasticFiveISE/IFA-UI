@@ -7,12 +7,11 @@ import Players from "../players/players";
 import Leagues from "../leagues/leagues";
 import Coach from "../coach/coach";
 import Seasons from "../seasons/seasons";
-import Games from "../games/games";
 import useStyles from "./dashboardStyle";
 import Link from "@material-ui/core/Link";
 import { AuthContext } from "../../providers/authProvider";
 import Login from "../login/Login";
-
+import Games from "../games/games"
 const hist = createBrowserHistory();
 
 export default function Dashboard() {
@@ -60,16 +59,11 @@ export default function Dashboard() {
             <Route path="/seasons">
               <Seasons />
             </Route>
-<<<<<<< HEAD
-            <Route path="/games">
-              <Games />
-            </Route>
-
-            {/* //////////////////// */}
-=======
->>>>>>> origin/implement-teams-scenario
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/games">
+              <Games />
             </Route>
           </Switch>
         </main>
