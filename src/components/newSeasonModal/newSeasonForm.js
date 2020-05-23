@@ -7,7 +7,7 @@ export default function NewTeamForm(props) {
   const [values, setValues] = React.useState({
     season: "",
     leagues: [],
-    selectedLeagues: [],
+    selectedLeague: "",
     schedulePolicy: "",
     rankingMethod: "",
     initialize: false,
@@ -30,33 +30,27 @@ export default function NewTeamForm(props) {
 
   const handleSeasonsChange = (event) => {
     const league = event.target.value;
+    console.log(values.selectedLeagues);
     if (values.selectedLeagues && values.selectedLeagues.indexOf(league) >= 0) {
-      const i = values.selectedLeagues.indexOf(league);
-      const newLeaguesList = values.selectedLeagues
-        .slice(0, i)
-        .concat(
-          values.selectedLeagues.slice(i + 1, values.selectedLeagues.length)
-        );
-      setValues({ ...values, selectedLeagues: newLeaguesList });
+   //
     } else {
       setValues({
         ...values,
-        selectedLeagues: [...values.selectedLeagues, league],
+        selectedLeagues:  league,
       });
     }
+    console.log(values.selectedLeagues);
+
   };
 
   const handlePolicyChange = (event) => {
     const policy = event.target.value;
-    if (values.schedulePolicy && values.schedulePolicy.trim() !== "") {
-      
-      setValues({ ...values, schedulePolicy: "" });
-    } else {
-      setValues({
+    setValues({
         ...values,
-        schedulePolicy: [...values.schedulePolicy, policy],
+        schedulePolicy: policy,
+        
       });
-    }
+      console.log(values.schedulePolicy);
 
   };
 
@@ -75,7 +69,7 @@ export default function NewTeamForm(props) {
               type="radio"
               id={league.leagueName}
               value={league.leagueName}
-              onChange={handleSeasonsChange}
+              onClick={handleSeasonsChange}
               name="leagues"
               required
             />
@@ -84,33 +78,34 @@ export default function NewTeamForm(props) {
         ))}
       </div>
       <div className={classes.formRow}>
-        <h3>Choose schedule game policy for this season:</h3>
+        <h4>Choose schedule game policy for this season:</h4>
         <label className={classes.checkbox}>
           <input
             type="radio"
             id="policy1"
-            name="peripherals"
-            value="screen"
-            onChange={handlePolicyChange}
-            required
+            name="policy"
+            value="OneGame"
+            onClick={handlePolicyChange}
+            
           />
-          <p className={classes.checkboxLabel}>methode1</p>
+          <p className={classes.checkboxLabel}>OneGame</p>
          
         </label>
         <label className={classes.checkbox}>
           <input
             type="radio"
             id="policy2"
-            name="peripherals"
-            value="screen"
-            required
+            name="policy"
+            value="TwoGameSchedulingMethod"
+            onClick={handlePolicyChange}
+            
           />
-          <p className={classes.checkboxLabel}>methode2</p>
+          <p className={classes.checkboxLabel}>TwoGame</p>
          
         </label>
       </div>
       <div className={classes.formRow}>
-        <h3>Choose ranking methode policy for this season:</h3>
+        <h4>Choose ranking methode policy for this season:</h4>
         <label className={classes.checkbox}>
           <input
             type="radio"
@@ -119,7 +114,7 @@ export default function NewTeamForm(props) {
             value="screen"
             required
           />
-          <p className={classes.checkboxLabel}>Default  </p>
+          <p className={classes.checkboxLabel}>Default </p>
         </label>
       </div>
       <button type="submit" className={classes.submit} onClick={props.close}>
