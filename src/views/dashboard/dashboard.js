@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Menu from "../../components/menu/menu";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
@@ -9,16 +9,15 @@ import Coach from "../coach/coach";
 import Seasons from "../seasons/seasons";
 import Games from "../games/games";
 import useStyles from "./dashboardStyle";
+import Link from "@material-ui/core/Link";
+import { AuthContext } from "../../providers/authProvider";
+import Login from "../login/Login";
 
-//
-import Login from "../Login"; 
-/*
-   
-*/
 const hist = createBrowserHistory();
 
 export default function Dashboard() {
   const classes = useStyles();
+  const authContext = useContext(AuthContext);
 
   return (
     <div className={classes.root}>
@@ -26,6 +25,24 @@ export default function Dashboard() {
         <nav className={classes.drawer} aria-label="mailbox folders">
           <Menu />
         </nav>
+        {authContext.state.user ||
+        hist.location.pathname === "/login" ? null : (
+          <div className={classes.login}>
+            <Link href="/login">Login</Link>
+          </div>
+        )}
+        {authContext.state.user ? (
+          <div className={classes.login}>
+            Hello {authContext.state.user.name}, {"   "}
+            <Link
+              onClick={() => {
+                authContext.setState({ user: null });
+              }}
+            >
+              Logout
+            </Link>
+          </div>
+        ) : null}
         <main className={classes.content}>
           <Switch>
             <Route path="/teams">
@@ -43,15 +60,17 @@ export default function Dashboard() {
             <Route path="/seasons">
               <Seasons />
             </Route>
+<<<<<<< HEAD
             <Route path="/games">
               <Games />
             </Route>
 
             {/* //////////////////// */}
+=======
+>>>>>>> origin/implement-teams-scenario
             <Route path="/login">
               <Login />
             </Route>
-
           </Switch>
         </main>
       </Router>

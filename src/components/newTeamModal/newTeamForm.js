@@ -1,71 +1,101 @@
-import React from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import Input from "@material-ui/core/Input";
-import FilledInput from "@material-ui/core/FilledInput";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import React, { useEffect } from "react";
+import { useStyles } from "./useStyles";
+import Api from "../../api/mock/Api";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  margin: {
-    margin: theme.spacing(1),
-  },
-  withoutLabel: {
-    marginTop: theme.spacing(3),
-  },
-  textField: {
-    width: "25ch",
-  },
-}));
-
-export default function NewTeamForm() {
+export default function NewTeamForm(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
+    teamName: "",
+    players: [],
+    coach: [],
+    selectedPlayers: [],
+    stadium: "",
+    initialize: false,
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    const [players] = await Promise.all([
+      Api.getPlayers({ ...values, available: true }),
+    ]);
+    setValues({ ...values, players: players, initialize: true });
   };
 
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
+  const handlePlayersChange = (event) => {
+    const player = event.target.value;
+    if (values.selectedPlayers && values.selectedPlayers.indexOf(player) >= 0) {
+      const i = values.selectedPlayers.indexOf(player);
+      const newPlayersList = values.selectedPlayers
+        .slice(0, i)
+        .concat(
+          values.selectedPlayers.slice(i + 1, values.selectedPlayers.length)
+        );
+      setValues({ ...values, selectedPlayers: newPlayersList });
+    } else {
+      setValues({
+        ...values,
+        selectedPlayers: [...values.selectedPlayers, player],
+      });
+    }
   };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  const handleStadiumChange = (event) => {};
 
-  return (
+  const handleCoachesChange = (event) => {};
+  return values.initialize ? (
     <div className={classes.root}>
-      <div>Create new Team</div>
-      <div>
-        <TextField
-          label="With normal TextField"
-          id="standard-start-adornment"
-          className={clsx(classes.margin, classes.textField)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">Kg</InputAdornment>
-            ),
-          }}
-        />
+      <h1>Create new Team</h1>
+      <div className={classes.formRow}>
+        <h3>Enter team name</h3>
+        <input className={classes.input} placeholder="Team name" />
       </div>
+      <div className={classes.formRow}>
+        <h3>Choose players</h3>
+        {values.players.map((player) => (
+          <label key={player.name} className={classes.checkbox}>
+            <input
+              type="checkbox"
+              id={player.name}
+              name={player.name}
+              value={player.userName}
+              onChange={handlePlayersChange}
+            />
+            <p className={classes.checkboxLabel}>{player.name}</p>
+          </label>
+        ))}
+      </div>
+      <div className={classes.formRow}>
+        <h3>Choose coach</h3>
+        <label className={classes.checkbox}>
+          <input
+            type="checkbox"
+            id="periph1"
+            name="peripherals"
+            value="screen"
+          />
+          <p className={classes.checkboxLabel}>coach1</p>
+        </label>
+      </div>
+      <div className={classes.formRow}>
+        <h3>Choose stadium</h3>
+        <label className={classes.checkbox}>
+          <input
+            type="checkbox"
+            id="periph1"
+            name="peripherals"
+            value="screen"
+          />
+          <p className={classes.checkboxLabel}>stadium1</p>
+        </label>
+      </div>
+      <button type="submit" className={classes.submit} onClick={props.close}>
+        Submit
+      </button>
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 }

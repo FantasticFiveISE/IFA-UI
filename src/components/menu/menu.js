@@ -7,11 +7,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 import useStyles from "../menu/menuStyle";
 
-const getGeustList = () => {  
+const getGeustList = () => {
   return (
     <List>
-      {/* /////////////////////// */}
-      {["Teams", "Players", "Coach", "Leagues", "Seasons", "Games", "Login"].map(
+      {["Teams", "Players", "Coach", "Leagues", "Seasons"].map(
         (text, index) => (
           <ListItem button key={text} component={Link} to={"/" + text}>
             <ListItemText primary={text} />
@@ -38,7 +37,7 @@ export default function Menu() {
     <div>
       <Drawer
         classes={{
-          paper: classes.drawerPaper
+          paper: classes.drawerPaper,
         }}
         variant="permanent"
         open

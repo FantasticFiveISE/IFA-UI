@@ -1,6 +1,6 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
 import NewTeamForm from "./newTeamForm";
 
 function rand() {
@@ -20,10 +20,10 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -36,23 +36,17 @@ export default function CreateTeamModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <NewTeamForm />
+      <NewTeamForm close={props.close} />
     </div>
   );
 
   return (
     <Modal
-    open={props.open}
-    aria-labelledby="simple-modal-title"
-    aria-describedby="simple-modal-description"
-  >
-    {body}
-  </Modal>
-    // <div>
-    //   {/* <button type="button" onClick={handleOpen}>
-    //     Open Modal
-    //   </button> */}
-      
-    // </div>
+      open={props.open}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+    >
+      {body}
+    </Modal>
   );
 }
