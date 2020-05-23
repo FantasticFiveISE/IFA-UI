@@ -1,6 +1,9 @@
 import loginResponse from "./resources/loginResponse";
 import teamsResponse from "./resources/teamsResponse";
 import playersResponse from "./resources/playersResponse";
+import coachesResponse from "./resources/coachesResponse";
+import fieldsResponse from "./resources/fieldsResponse";
+
 class API {
   ENDPOINT = "localhost:8080";
 
@@ -83,13 +86,13 @@ class API {
     if (params.available) {  
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(FieldsResponse);
+          resolve(fieldsResponse);
         }, 200);
       });
     } else {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(FieldsResponse);
+          resolve(fieldsResponse);
         }, 200);
       });
     }
