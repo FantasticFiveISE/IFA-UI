@@ -68,7 +68,7 @@ export default function NewTeamForm(props) {
         <input className={classes.input} type="number" placeholder="YYYY" min="2020" max="2100" />
       </div>
       <div className={classes.formRow}>
-        <h3>Choose players</h3>
+        <h3>Choose league</h3>
         {values.leagues.map((league) => (
           <label key={league.leagueName} className={classes.checkbox}>
             <input
