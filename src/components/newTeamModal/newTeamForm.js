@@ -21,7 +21,11 @@ export default function NewTeamForm(props) {
     const [players] = await Promise.all([
       Api.getPlayers({ ...values, available: true }),
     ]);
+    console.log(players);
+
     setValues({ ...values, players: players, initialize: true });
+    console.log(values.players);
+
   };
 
   const handlePlayersChange = (event) => {
