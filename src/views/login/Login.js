@@ -11,21 +11,25 @@ export default function Login() {
   const history = useHistory(); // using the
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
-  
+  const [error, setError] = useState("");
+
   // validation of the form + submit is pressed
   function handleSubmit(event) {
     // TODO: validate inputes
     event.preventDefault();    
-    authContext.setState({ isLoading: true });
     API.login(Response.username, Response.password)
       .then((user) => {
+        authContext.setState({ isLoading: true });
         console.log("user", JSON.stringify(user));
         authContext.setState({ user: user, isLoading: false });
         history.push("/");
+        setError(false);
+
       })
       .catch((error) => {// TODO: Handle errors
         console.log(error);  
-        authContext.setState({ error: error, isLoading: false });
+        setError(true);
+        // authContext.setState({ error: error, isLoading: false });
       }
       ); 
 
@@ -53,6 +57,9 @@ export default function Login() {
             required
           />
         </FormGroup>
+        {error === true ? (
+          <p Style="color:red;">Invalid username or password</p>
+        ) : null}
         <Button block bsSize="large" type="submit">
           Login
         </Button>
