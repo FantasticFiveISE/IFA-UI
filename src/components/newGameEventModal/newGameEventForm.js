@@ -50,7 +50,8 @@ export default function NewGameEventForm(props) {
           <option value="Red Card">Red Card</option>
           <option value="Yellow Card">Yellow Card</option>
           <option value="Injury">Injury</option>
-          <option value="Substitution">Substitution</option>
+          <option value="PlayerIn">Player In</option>
+          <option value="PlayerOut">Player Out</option>
 
         </select>
       </div>
