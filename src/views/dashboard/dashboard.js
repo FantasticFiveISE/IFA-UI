@@ -59,6 +59,9 @@ export default function Dashboard() {
             <Route path="/seasons">
               <Seasons />
             </Route>
+            <Route path="/games">
+              <Games />
+            </Route>
             <Route path="/login">
               <Login />
             </Route>

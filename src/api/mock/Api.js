@@ -1,8 +1,11 @@
 import loginResponse from "./resources/loginResponse";
 import teamsResponse from "./resources/teamsResponse";
 import playersResponse from "./resources/playersResponse";
-import gamesResponse from "./resources/gameResponse";
 import leaguesResponse from "./resources/leaguesResponse";
+import coachesResponse from "./resources/coachesResponse";
+import fieldsResponse from "./resources/fieldsResponse";
+import gameResponse from "./resources/gameResponse";
+
 
 class API {
   ENDPOINT = "localhost:8080";
@@ -58,7 +61,7 @@ class API {
   getRefereeGames = async () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(gamesResponse);
+        resolve(gameResponse);
       }, 200);
     });
   };
@@ -91,16 +94,34 @@ class API {
     if (params.available) {  
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(playersResponse);
+          resolve(coachesResponse);
         }, 200);
       });
     } else {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(playersResponse);
+          resolve(coachesResponse);
         }, 200);
       });
     }
   };
+
+  getFields = async (params) => {
+    // Need to filter by params in better way
+    if (params.available) {  
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(fieldsResponse);
+        }, 200);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(fieldsResponse);
+        }, 200);
+      });
+    }
+  };
+
 }
 export default new API();

@@ -10,7 +10,6 @@ import useStyles from "../menu/menuStyle";
 const getGeustList = () => {  
   return (
     <List>
-      {/* /////////////////////// */}
       {["Teams", "Players", "Coach", "Leagues", "Seasons", "Games"].map(
         (text, index) => (
           <ListItem button key={text} component={Link} to={"/" + text}>

@@ -7,9 +7,11 @@ export default function NewTeamForm(props) {
   const [values, setValues] = React.useState({
     teamName: "",
     players: [],
-    coach: [],
+    coaches: [],
+    selectedCoach: "",
+    fields: [],
     selectedPlayers: [],
-    stadium: "",
+    selectedStadium: "",
     initialize: false,
   });
 
@@ -21,11 +23,13 @@ export default function NewTeamForm(props) {
     const [players] = await Promise.all([
       Api.getPlayers({ ...values, available: true }),
     ]);
-    console.log(players);
-
-    setValues({ ...values, players: players, initialize: true });
-    console.log(values.players);
-
+    const [coaches] = await Promise.all([
+      Api.getCoaches({ ...values, available: true }),
+    ]);
+    const [fields] = await Promise.all([
+      Api.getFields({ ...values, available: true }),
+    ]);
+    setValues({ ...values, players: players, coaches: coaches, fields: fields, initialize: true });
   };
 
   const handlePlayersChange = (event) => {
@@ -46,9 +50,31 @@ export default function NewTeamForm(props) {
     }
   };
 
-  const handleStadiumChange = (event) => {};
+  const handleStadiumChange = (event) => {
+    const field = event.target.value;
+    if (values.selectedStadium && values.selectedStadium.length !== 0) {
+      setValues({ ...values, selectedStadium: "" });
+    } else {
+      setValues({
+        ...values,
+        selectedStadium: field,
+      });
+    }
+  };
 
-  const handleCoachesChange = (event) => {};
+  const handleCoachesChange = (event) => {
+    const coach = event.target.value;
+    if (values.selectedCoach && values.selectedCoach.length !== 0) {
+      setValues({ ...values, selectedCoach: "" });
+    } else {
+      setValues({
+        ...values,
+        selectedCoach: coach,
+      });
+    }
+  };
+
+
   return values.initialize ? (
     <div className={classes.root}>
       <h1>Create new Team</h1>
@@ -73,33 +99,40 @@ export default function NewTeamForm(props) {
       </div>
       <div className={classes.formRow}>
         <h3>Choose coach</h3>
-        <label className={classes.checkbox}>
-          <input
-            type="checkbox"
-            id="periph1"
-            name="peripherals"
-            value="screen"
-          />
-          <p className={classes.checkboxLabel}>coach1</p>
-        </label>
+        {values.coaches.map((c) => (
+          <label key={c.name} className={classes.checkbox}>
+            <input
+              type="Radio"
+              id={c.name}
+              name="RadioCoach"
+              value={c.userName}
+              onChange={handleCoachesChange}
+            />
+            <p className={classes.checkboxLabel}>{c.name}</p>
+          </label>
+        ))}
       </div>
       <div className={classes.formRow}>
         <h3>Choose stadium</h3>
-        <label className={classes.checkbox}>
-          <input
-            type="checkbox"
-            id="periph1"
-            name="peripherals"
-            value="screen"
-          />
-          <p className={classes.checkboxLabel}>stadium1</p>
-        </label>
+        {values.fields.map((f) => (
+          <label key={f.fieldName} className={classes.checkbox}>
+            <input
+              type="Radio"
+              id={f.fieldName}
+              name="RadioField"
+              value={f.fieldName}
+              onChange={handleStadiumChange}
+            />
+            <p className={classes.checkboxLabel}>{f.fieldName}</p>
+          </label>
+        ))}
       </div>
+
       <button type="submit" className={classes.submit} onClick={props.close}>
         Submit
       </button>
-    </div>
+    </div >
   ) : (
-    <div>Loading...</div>
-  );
+      <div>Loading...</div>
+    );
 }
