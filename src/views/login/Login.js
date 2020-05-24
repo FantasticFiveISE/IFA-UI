@@ -36,6 +36,7 @@ export default function Login() {
             type="text"
             value={user}
             onChange={(e) => setUser(e.target.value)}
+            required
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
@@ -44,6 +45,7 @@ export default function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
+            required
           />
         </FormGroup>
         <Button block bsSize="large" type="submit">
