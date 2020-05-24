@@ -11,12 +11,22 @@ class API {
   ENDPOINT = "localhost:8080";
 
   // Auth API
+  //TODO: change autherized 
   login = (username, password) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(loginResponse);
-      }, 200);
+    let autherized = false;
+    if(autherized){
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(loginResponse);
+        }, 200);
+      });
+    }else{
+      return new Promise((resolve, reject) => { // eslint-disable-line no-unused-vars
+        setTimeout(() => {
+            reject(new Error("invalid info: please check userName or password!"));
+        }, 1000);
     });
+    }
   };
 
   logout = () => {
@@ -33,6 +43,8 @@ class API {
         resolve(teamsResponse);
       }, 200);
     });
+
+    
   };
 
   createTeam = () => {};

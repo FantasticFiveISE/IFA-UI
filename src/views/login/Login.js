@@ -11,7 +11,7 @@ export default function Login() {
   const history = useHistory(); // using the
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
-
+  
   // validation of the form + submit is pressed
   function handleSubmit(event) {
     // TODO: validate inputes
@@ -23,7 +23,12 @@ export default function Login() {
         authContext.setState({ user: user, isLoading: false });
         history.push("/");
       })
-      .catch((error) => console.log(error)); // TODO: Handle errors
+      .catch((error) => {// TODO: Handle errors
+        console.log(error);  
+        authContext.setState({ error: error, isLoading: false });
+      }
+      ); 
+
   }
 
   return (
