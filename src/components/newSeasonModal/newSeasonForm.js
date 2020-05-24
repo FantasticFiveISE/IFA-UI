@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useStyles } from "../newTeamModal/useStyles";
 import Api from "../../api/mock/Api";
 
-export default function NewTeamForm(props) {
+export default function NewSeasonForm(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     season: "",
