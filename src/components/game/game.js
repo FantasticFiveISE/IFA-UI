@@ -30,8 +30,21 @@ export default function Game(props) {
   };
 
 
-  const handleExpandClick = () => {
+  const handleExpandClick = async () => {
     setExpanded(!expanded);
+  };
+
+  const downloadTxtFile = async () => {
+    const fileName = "report";
+    const json = JSON.stringify(props.gameEvents);
+    const blob = new Blob([json],{type:'application/json'});
+    const href = await URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = fileName + ".txt";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -100,7 +113,7 @@ export default function Game(props) {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Add Event</MenuItem>
-        <MenuItem onClick={handleClose}>Create Report</MenuItem>
+        <MenuItem onClick={downloadTxtFile}>Create Report</MenuItem>
         <MenuItem onClick={handleClose}>Follow Game</MenuItem>
       </Menu>
     </Card>
