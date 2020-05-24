@@ -5,10 +5,9 @@ import Api from "../../api/mock/Api";
 export default function NewGameEventForm(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    date: "",
-    hour: "",
     minutes: "",
     event: "",
+    description:"",
     initialize: false,
   });
 
@@ -39,21 +38,26 @@ export default function NewGameEventForm(props) {
     <div className={classes.root}>
       <h1>Please fill these form accourding to the game event</h1>
       <div className={classes.formRow}>
-        <h3>Enter the date:</h3>
-        <input className={classes.input} type="date" placeholder="YYYY" min="2020" max="2100" onChange={(e) => setValues({...values,date:  e.target.value})} required/>
-      </div>
-      <div className={classes.formRow}>
-        <h3>Enter the hour:</h3>
-        {/* <input className={classes.input} type="time" placeholder="YYYY" min="2020" max="2100" /> */}
-        <input type="time" name="time" placeholder="hrs:mins" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$" onChange={(e) => setValues({...values,hour:  e.target.value})}  required/>
-      </div>
-      <div className={classes.formRow}>
         <h3>Enter the minutes in game:</h3>
         <input className={classes.input} type="number" placeholder="MM" min="0" max="90" onChange={(e) => setValues({...values,minutes:  e.target.value})} required/>
       </div>
       <div className={classes.formRow}>
+        <h3>Choose an event:</h3>
+        <select onChange={(e) => setValues({...values,event:  e.target.value})}>
+          <option value="Goal">Goal</option>
+          <option value="Offside">Offside</option>
+          <option value="Foul">Foul</option>
+          <option value="Red Card">Red Card</option>
+          <option value="Yellow Card">Yellow Card</option>
+          <option value="Injury">Injury</option>
+          <option value="Substitution">Substitution</option>
+
+        </select>
+      </div>
+
+      <div className={classes.formRow}>
         <h3>Enter a description of the event:</h3>
-        <input className={classes.input} type="text" placeholder="Goal By messi" onChange={(e) => setValues({...values,event:  e.target.value})}  required />
+        <input className={classes.input} type="text" placeholder="Goal By messi" onChange={(e) => setValues({...values,description:  e.target.value})}  required />
       </div>
 
         {/* TODO: handle submit ONCLICK */}
