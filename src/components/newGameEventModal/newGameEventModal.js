@@ -1,7 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
+<<<<<<< HEAD
 import NewGameEventForm from "./newGameEventForm";
+=======
+import newGameEventForm from "./newGameEventForm";
+>>>>>>> 4b9040c870814c6cbcdb2480c53070e915e3112f
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -29,14 +33,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateSeasonModal(props) {
+export default function CreateEventModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <NewGameEventForm close={props.close} />
+      <newGameEventForm close={props.close} />
     </div>
   );
 
