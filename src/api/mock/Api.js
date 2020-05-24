@@ -11,7 +11,8 @@ class API {
   ENDPOINT = "localhost:8080";
 
   // Auth API
-  //TODO: change autherized 
+  //TODO: deleted autherized 
+  // autherized is mock 
   login = (username, password) => {
     let autherized = false;
     if(autherized){
@@ -24,7 +25,7 @@ class API {
       return new Promise((resolve, reject) => { // eslint-disable-line no-unused-vars
         setTimeout(() => {
             reject(new Error("invalid info: please check userName or password!"));
-        }, 1000);
+        }, 200);
     });
     }
   };

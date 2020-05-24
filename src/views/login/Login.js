@@ -5,7 +5,12 @@ import Response from "../../api/mock/resources/loginResponse";
 import { AuthContext } from "../../providers/authProvider";
 import { useHistory } from "react-router-dom";
 import API from "../../api/mock/Api";
+import MuiAlert from '@material-ui/lab/Alert';
 
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 export default function Login() {
   const authContext = useContext(AuthContext);
   const history = useHistory(); // using the
@@ -58,7 +63,7 @@ export default function Login() {
           />
         </FormGroup>
         {error === true ? (
-          <p Style="color:red;">Invalid username or password</p>
+          <Alert severity="error">Invalid username or password</Alert>
         ) : null}
         <Button block bsSize="large" type="submit">
           Login
