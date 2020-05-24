@@ -8,7 +8,7 @@ export default function () {
     const [games, setGames] = useState([]);
 
     const getGames = async () => {
-        const response = await new API().getRefereeGames();
+        const response = await API.getRefereeGames();
         setGames(response);
     };
 
