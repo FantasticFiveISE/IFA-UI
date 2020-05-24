@@ -1,6 +1,7 @@
 import loginResponse from "./resources/loginResponse";
 import teamsResponse from "./resources/teamsResponse";
 import playersResponse from "./resources/playersResponse";
+import leaguesResponse from "./resources/leaguesResponse";
 import coachesResponse from "./resources/coachesResponse";
 import fieldsResponse from "./resources/fieldsResponse";
 import gameResponse from "./resources/gameResponse";
@@ -37,7 +38,23 @@ class API {
   createTeam = () => {};
 
   // Leagues API
-  getLeagues = () => {};
+  getLeagues = async (params) => {
+    // Need to filter by params in better way
+    if (params.available) {  
+      //fecth("get", ENDPOINT + /players?available=true);
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(leaguesResponse);
+        }, 200);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(leaguesResponse);
+        }, 200);
+      });
+    }
+  };
   updateLeague = () => {};
 
   // Games API
