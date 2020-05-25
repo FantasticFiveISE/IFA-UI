@@ -13,9 +13,9 @@ function AuthProvider({children}) {
     <AuthContext.Provider value={{state, setState}}>
       { state.error != null ? (
         <div>
-          Oh no
+          <h1>Oh no, somthing went wrong!</h1>
           <div>
-            <pre>{state.error.message}</pre>
+            <pre><h3>{state.error.message}</h3></pre>
           </div>
         </div>
       ) : state.isLoading? <div>Loading...</div> :(  //think about some nice spinner until we get response
