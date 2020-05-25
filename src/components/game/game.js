@@ -30,7 +30,7 @@ export default function Game(props) {
   };
 
 
-  const handleExpandClick = async () => {
+  const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
