@@ -11,7 +11,8 @@ import useStyles from "./dashboardStyle";
 import Link from "@material-ui/core/Link";
 import { AuthContext } from "../../providers/authProvider";
 import Login from "../login/Login";
-import Games from "../games/games"
+import Games from "../games/games";
+import LoggedinUserPanel from "../../components/loggedinUserPanel/loggedinUserPanel";
 const hist = createBrowserHistory();
 
 export default function Dashboard() {
@@ -31,16 +32,7 @@ export default function Dashboard() {
           </div>
         )}
         {authContext.state.user ? (
-          <div className={classes.login}>
-            Hello {authContext.state.user.name}, {"   "}
-            <Link
-              onClick={() => {
-                authContext.setState({ user: null });
-              }}
-            >
-              Logout
-            </Link>
-          </div>
+          <LoggedinUserPanel authContext={authContext} />
         ) : null}
         <main className={classes.content}>
           <Switch>
