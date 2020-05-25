@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -14,14 +14,19 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import useStyles from "./gameStyle";
 import CreateGameEventModal from "../../components/newGameEventModal/newGameEventModal";
-
+import { AuthContext } from "../../providers/authProvider";
+import SockJsClient from "react-stomp";
+ 
 
 export default function Game(props) {
   const classes = useStyles();
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [expanded, setExpanded] = React.useState(false);
   const [createGameEventOpen, setOpen] = React.useState(false);
+  const authContext = useContext(AuthContext);
+  const [clientConnected, setClientConnected] = React.useState(false);
+  const [messages, setMessages] = React.useState([]);
+  let clientRef = null;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -48,6 +53,17 @@ export default function Game(props) {
     link.click();
     document.body.removeChild(link);
   };
+
+  const handleFollow = async () => {
+    const {user} = authContext.state;
+    if(!user){
+      return;
+    }
+    sendMessage(
+      "hello", user.username
+    )
+
+  }
   
   const handleModalOpen = () => {
     setOpen(true);
@@ -56,6 +72,22 @@ export default function Game(props) {
   const handleModalClose = () => {
     setOpen(false);
   };
+
+  const onMessageReceive = (msg, topic) => {
+    console.log(JSON.stringify(msg));
+    setMessages([...messages, msg]);
+  }
+
+  const sendMessage = (msg, selfMsg) => {
+    try {
+      clientRef.sendMessage("/topic/public", selfMsg);
+      return true;
+    } catch(e) {
+      return false;
+    }
+  }
+
+  console.log(messages);
 
   return (
     <div>
@@ -125,13 +157,18 @@ export default function Game(props) {
       >
         <MenuItem  onClick={handleModalOpen}>Add Event</MenuItem>
         <MenuItem onClick={downloadTxtFile}>Create Report</MenuItem>
-        <MenuItem onClick={handleClose}>Follow Game</MenuItem>
+        <MenuItem onClick={handleFollow}>Follow Game</MenuItem>
       </Menu>
     </Card>
 
     <CreateGameEventModal open={createGameEventOpen} close={handleModalClose} />
+
+    <SockJsClient url="http://localhost:8080/notifications" topics={["/topic/public"]}
+          onMessage={ onMessageReceive } ref={ (client) => { clientRef = client }}
+          onConnect={ () => { setClientConnected(true) } }
+          onDisconnect={ () => { setClientConnected(false) } }
+          debug={ false }/>
     </div>
     
-
   );
 }

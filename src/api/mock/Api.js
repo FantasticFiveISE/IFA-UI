@@ -14,7 +14,7 @@ class API {
   //TODO: deleted autherized 
   // autherized is mock 
   login = (username, password) => {
-    let autherized = false;
+    let autherized = true;
     if(autherized){
       return new Promise((resolve) => {
         setTimeout(() => {
