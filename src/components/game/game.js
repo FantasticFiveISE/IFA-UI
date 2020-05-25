@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import useStyles from "./gameStyle";
+import CreateGameEventModal from "../../components/newGameEventModal/newGameEventModal";
 
 
 export default function Game(props) {
@@ -20,6 +21,7 @@ export default function Game(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [expanded, setExpanded] = React.useState(false);
+  const [createGameEventOpen, setOpen] = React.useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -46,8 +48,17 @@ export default function Game(props) {
     link.click();
     document.body.removeChild(link);
   };
+  
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setOpen(false);
+  };
 
   return (
+    <div>
     <Card className={classes.root}>
       <CardHeader
         action={
@@ -112,10 +123,15 @@ export default function Game(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Add Event</MenuItem>
+        <MenuItem  onClick={handleModalOpen}>Add Event</MenuItem>
         <MenuItem onClick={downloadTxtFile}>Create Report</MenuItem>
         <MenuItem onClick={handleClose}>Follow Game</MenuItem>
       </Menu>
     </Card>
+
+    <CreateGameEventModal open={createGameEventOpen} close={handleModalClose} />
+    </div>
+    
+
   );
 }

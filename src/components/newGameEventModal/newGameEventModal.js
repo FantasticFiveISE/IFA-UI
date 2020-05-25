@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import newGameEventForm from "./newGameEventForm";
+import NewGameEventForm from "./newGameEventForm";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -36,7 +36,7 @@ export default function CreateEventModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <newGameEventForm close={props.close} />
+      <NewGameEventForm close={props.close} />
     </div>
   );
 
