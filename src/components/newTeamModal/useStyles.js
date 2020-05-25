@@ -38,4 +38,12 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '14%',
     backgroundColor: "#f50057",
   },
+  ranking: {
+    height: "20px",
+    marginLeft:"15px",
+    marginTop:"13px",
+    width:"100px",
+    border: "0",
+    borderBottom: "1px solid black",
+  } 
 }));
