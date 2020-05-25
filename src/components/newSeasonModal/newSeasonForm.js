@@ -23,7 +23,7 @@ export default function NewTeamForm(props) {
     ]);
     console.log(leagues);
 
-    console.log(leagues.leagueName);
+    // console.log(leagues);
     setValues({ ...values, leagues: leagues, initialize: true });
     console.log(values.leagues);
   };
@@ -64,16 +64,16 @@ export default function NewTeamForm(props) {
       <div className={classes.formRow}>
         <h3>Choose league</h3>
         {values.leagues.map((league) => (
-          <label key={league.leagueName} className={classes.checkbox}>
+          <label key={league} className={classes.checkbox}>
             <input
               type="radio"
-              id={league.leagueName}
-              value={league.leagueName}
+              id={league}
+              value={league}
               onClick={handleSeasonsChange}
               name="leagues"
               required
             />
-            <p className={classes.checkboxLabel}>{league.leagueName}</p>
+            <p className={classes.checkboxLabel}>{league}</p>
           </label>
         ))}
       </div>
