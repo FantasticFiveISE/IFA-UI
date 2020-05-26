@@ -9,12 +9,15 @@ export default function NewSeasonForm(props) {
     leagues: [],
     selectedLeague: "",
     schedulePolicy: "",
-    rankingMethod: "",
+    win_points: "3", // default ranking method
+    lose_points: "0",// default ranking method
+    draw_points: "1",// default ranking method
     initialize: false,
   });
 
   useEffect(() => {
     loadData();
+    console.log(values);
   }, []);
 
   const loadData = async () => {
@@ -23,23 +26,23 @@ export default function NewSeasonForm(props) {
     ]);
     console.log(leagues);
 
-    console.log(leagues.leagueName);
+    // console.log(leagues);
     setValues({ ...values, leagues: leagues, initialize: true });
     console.log(values.leagues);
   };
 
   const handleSeasonsChange = (event) => {
     const league = event.target.value;
-    console.log(values.selectedLeagues);
-    if (values.selectedLeagues && values.selectedLeagues.indexOf(league) >= 0) {
+    console.log(values.selectedLeague);
+    if (values.selectedLeague && values.selectedLeague.indexOf(league) >= 0) {
    //
     } else {
       setValues({
         ...values,
-        selectedLeagues:  league,
+        selectedLeague:  league,
       });
     }
-    console.log(values.selectedLeagues);
+    console.log(values.selectedLeague);
 
   };
 
@@ -51,6 +54,7 @@ export default function NewSeasonForm(props) {
         
       });
       console.log(values.schedulePolicy);
+      console.log(values);
 
   };
 
@@ -59,25 +63,25 @@ export default function NewSeasonForm(props) {
       <h1>Create new Season</h1>
       <div className={classes.formRow}>
         <h3>Enter Season year:</h3>
-        <input className={classes.input} type="number" placeholder="YYYY" min="2020" max="2100" />
+        <input className={classes.input} type="number" placeholder="YYYY" min="2020" max="2100" onChange={(e) => setValues({...values,season:  e.target.value})}/>
       </div>
       <div className={classes.formRow}>
         <h3>Choose league</h3>
         {values.leagues.map((league) => (
-          <label key={league.leagueName} className={classes.checkbox}>
+          <label key={league} className={classes.checkbox}>
             <input
               type="radio"
-              id={league.leagueName}
-              value={league.leagueName}
+              id={league}
+              value={league}
               onClick={handleSeasonsChange}
               name="leagues"
               required
             />
-            <p className={classes.checkboxLabel}>{league.leagueName}</p>
+            <p className={classes.checkboxLabel}>{league}</p>
           </label>
         ))}
       </div>
-      <div className={classes.formRow}>
+      <div className={classes.formRow} onChange={handlePolicyChange}>
         <h4>Choose schedule game policy for this season:</h4>
         <label className={classes.checkbox}>
           <input
@@ -85,7 +89,7 @@ export default function NewSeasonForm(props) {
             id="policy1"
             name="policy"
             value="OneGame"
-            onClick={handlePolicyChange}
+            // onClick={handlePolicyChange}
             
           />
           <p className={classes.checkboxLabel}>OneGame</p>
@@ -97,7 +101,7 @@ export default function NewSeasonForm(props) {
             id="policy2"
             name="policy"
             value="TwoGameSchedulingMethod"
-            onClick={handlePolicyChange}
+            // onClick={handlePolicyChange}
             
           />
           <p className={classes.checkboxLabel}>TwoGame</p>
@@ -107,14 +111,19 @@ export default function NewSeasonForm(props) {
       <div className={classes.formRow}>
         <h4>Choose ranking methode policy for this season:</h4>
         <label className={classes.checkbox}>
-          <input
-            type="radio"
-            id="rank"
-            name="peripherals"
-            value="screen"
-            required
-          />
-          <p className={classes.checkboxLabel}>Default </p>
+          <p>Win:</p>
+          <br/>
+          <input className={classes.ranking} name="ranking" type="number" placeholder="3" min="0" max="10" onChange={(e) => setValues({...values,win_points:  e.target.value})}/>
+        </label>
+        <label className={classes.checkbox}>
+          <p>Draw:</p>
+          <br/>
+          <input className={classes.ranking} name="ranking" type="number" placeholder="1" min="0" max="10" onChange={(e) => setValues({...values,draw_points:  e.target.value})}/>
+        </label>
+        <label className={classes.checkbox}>
+          <p>Lose:</p>
+          <br/>
+          <input className={classes.ranking} name="ranking" type="number" placeholder="0" min="0" max="10" onChange={(e) => setValues({...values,lose_points:  e.target.value})}/>
         </label>
       </div>
       <button type="submit" className={classes.submit} onClick={props.close}>
