@@ -45,6 +45,7 @@ export default function Game(props) {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    handleClose();
   };
 
   const handleFollow = async (gameId) => {
@@ -55,10 +56,12 @@ export default function Game(props) {
         topics: [...notificationContext.state.topics, "/topic/game/register/" + gameId]
       }
     );
+    handleClose();
   }
 
   const handleModalOpen = () => {
     setOpen(true);
+    handleClose();
   };
 
   const handleModalClose = () => {

@@ -14,4 +14,11 @@ export default makeStyles((theme) => ({
     padding: 0,
     position: 'relative',
   },
+  notificationMenu: {
+    top: '49px',
+    left: '1768px'
+  },
+  notificationAlert: {
+    maxWidth: '100px'
+  }
 }));

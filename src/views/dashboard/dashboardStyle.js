@@ -5,6 +5,8 @@ const drawerWidth = 240;
 export default makeStyles((theme) => ({
   root: {
     display: "flex",
+    overflow: 'hidden' /* Hide scrollbars */
+
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
