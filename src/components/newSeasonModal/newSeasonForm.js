@@ -21,16 +21,16 @@ export default function NewSeasonForm(props) {
     const [leagues] = await Promise.all([
       Api.getLeagues({ ...values, available: true }),
     ]);
-    console.log(leagues);
+    //console.log(leagues);
 
-    console.log(leagues.leagueName);
+    //console.log(leagues.leagueName);
     setValues({ ...values, leagues: leagues, initialize: true });
-    console.log(values.leagues);
+    //console.log(values.leagues);
   };
 
   const handleSeasonsChange = (event) => {
     const league = event.target.value;
-    console.log(values.selectedLeagues);
+    //console.log(values.selectedLeagues);
     if (values.selectedLeagues && values.selectedLeagues.indexOf(league) >= 0) {
    //
     } else {
@@ -39,7 +39,7 @@ export default function NewSeasonForm(props) {
         selectedLeagues:  league,
       });
     }
-    console.log(values.selectedLeagues);
+    //(values.selectedLeagues);
 
   };
 
@@ -50,7 +50,7 @@ export default function NewSeasonForm(props) {
         schedulePolicy: policy,
         
       });
-      console.log(values.schedulePolicy);
+      //console.log(values.schedulePolicy);
 
   };
 

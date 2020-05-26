@@ -18,7 +18,11 @@ class API {
     if(autherized){
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(loginResponse);
+          resolve(
+            {
+              ...loginResponse, username: username
+            }
+          );
         }, 200);
       });
     }else{

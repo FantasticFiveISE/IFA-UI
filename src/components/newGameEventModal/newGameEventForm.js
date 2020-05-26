@@ -19,17 +19,17 @@ export default function NewGameEventForm(props) {
     const [leagues] = await Promise.all([
       Api.getLeagues({ ...values, available: true }),
     ]);
-    console.log(leagues);
+    //console.log(leagues);
 
-    console.log(leagues.leagueName);
+    //console.log(leagues.leagueName);
     setValues({ ...values, leagues: leagues, initialize: true });
-    console.log(values.leagues);
+    //console.log(values.leagues);
   };
 
 
 
   const handleSubmit = (event) => {
-    console.log(values);
+    //console.log(values);
 
     //Post request
   };

@@ -26,6 +26,9 @@ export default function Game(props) {
   const authContext = useContext(AuthContext);
   const [clientConnected, setClientConnected] = React.useState(false);
   const [messages, setMessages] = React.useState([]);
+  const [topics, setTopics] = React.useState([]);
+
+
   let clientRef = null;
 
   const handleClick = (event) => {
@@ -54,19 +57,22 @@ export default function Game(props) {
     document.body.removeChild(link);
   };
 
-  const handleFollow = async () => {
-    const {user} = authContext.state;
-    if(!user){
-      return;
-    }
-    sendMessage(
-      "hello", user.username
-    )
+  const handleFollow = async (gameId) => {
+ 
+    setTopics([...topics, "/topic/game/register/" + gameId]);
+
 
   }
   
   const handleModalOpen = () => {
-    setOpen(true);
+    const {user} = authContext.state;
+    if(!user){
+      return;
+    }
+    //setOpen(true);
+    sendMessage(
+      "hello", user.username
+    )
   };
 
   const handleModalClose = () => {
@@ -74,20 +80,18 @@ export default function Game(props) {
   };
 
   const onMessageReceive = (msg, topic) => {
-    console.log(JSON.stringify(msg));
+    console.log([...messages, msg]);
     setMessages([...messages, msg]);
   }
 
   const sendMessage = (msg, selfMsg) => {
     try {
-      clientRef.sendMessage("/topic/public", selfMsg);
+      clientRef.sendMessage("/topic/game/" + props.gameId, selfMsg + props.gameId);
       return true;
     } catch(e) {
       return false;
     }
   }
-
-  console.log(messages);
 
   return (
     <div>
@@ -157,13 +161,13 @@ export default function Game(props) {
       >
         <MenuItem  onClick={handleModalOpen}>Add Event</MenuItem>
         <MenuItem onClick={downloadTxtFile}>Create Report</MenuItem>
-        <MenuItem onClick={handleFollow}>Follow Game</MenuItem>
+        <MenuItem onClick={()=>handleFollow(props.gameId)}>Follow Game</MenuItem>
       </Menu>
     </Card>
 
     <CreateGameEventModal open={createGameEventOpen} close={handleModalClose} />
 
-    <SockJsClient url="http://localhost:8080/notifications" topics={["/topic/public"]}
+    <SockJsClient url="http://localhost:8080/notifications" topics={topics}
           onMessage={ onMessageReceive } ref={ (client) => { clientRef = client }}
           onConnect={ () => { setClientConnected(true) } }
           onDisconnect={ () => { setClientConnected(false) } }
