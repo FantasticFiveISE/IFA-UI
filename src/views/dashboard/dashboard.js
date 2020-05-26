@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Menu from "../../components/menu/menu";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
@@ -18,17 +18,6 @@ const hist = createBrowserHistory();
 export default function Dashboard() {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
-
-  const [createSeasonOpen, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div className={classes.root}>
       <Router history={hist}>

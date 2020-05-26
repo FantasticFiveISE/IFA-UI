@@ -33,13 +33,6 @@ class API {
     });
     }
   };
-  login = async  () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(loginResponse);
-      }, 200);
-    });
-  };
   logout = () => {
     // POST to /logout with username?
   }; //

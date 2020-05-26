@@ -1,58 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useContext  } from "react";
 import { useStyles } from "../newTeamModal/useStyles";
-import Api from "../../api/mock/Api";
+import { AuthContext } from "../../providers/authProvider";
 
 export default function NewAlertForm(props) {
   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    alertsMessages: [],
-    initialize: false,
-  });
+  const authContext = useContext(AuthContext);
+  console.log(authContext.state.user);
 
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    const alerts = await Api.login();
-    console.log(alerts);
-
-    // console.log(leagues);
-    setValues({ ...values, alertsMessages: alerts.alertsMessages, initialize: true });
-    // console.log(values.leagues);
-  };
-
-  const handleSeasonsChange = (event) => {
-    const league = event.target.value;
-    console.log(values.selectedLeague);
-    if (values.selectedLeague && values.selectedLeague.indexOf(league) >= 0) {
-   //
-    } else {
-      setValues({
-        ...values,
-        selectedLeague:  league,
-      });
-    }
-    console.log(values.selectedLeague);
-
-  };
-
-  const handlePolicyChange = (event) => {
-    const policy = event.target.value;
-    setValues({
-        ...values,
-        schedulePolicy: policy,
-        
-      });
-      console.log(values.schedulePolicy);
-      console.log(values);
-
-  };
-
-  return values.initialize ? (
+  return (
     <div className={classes.root}>
       <h2>Notifications you have missed:</h2>
-      {values.alertsMessages.map((league, index) => (
+      
+      {authContext.state.user.alertsMessages.map((league, index) => (
         <div className={classes.formRow} key={index}>
             <h5 id={league} value={league}>{index+1} - {league}</h5>
         </div>
@@ -61,7 +20,5 @@ export default function NewAlertForm(props) {
         Close
       </button>
     </div>
-  ) : (
-    <div>Loading...</div>
-  );
+  ) 
 }
