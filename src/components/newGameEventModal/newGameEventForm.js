@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useStyles } from "../newTeamModal/useStyles";
-import Api from "../../api/mock/Api";
 import { NotificationContext } from "../../providers/notificationProvider";
 
 export default function NewGameEventForm(props) {
@@ -19,8 +18,6 @@ export default function NewGameEventForm(props) {
   // Move to submit
   const sendMessage = (msg, selfMsg) => {
     try {
-      console.log("/topic/game/" + props.gameId, JSON.stringify(selfMsg));
-      console.log(notificationContext.state);
       notificationContext.state.client.sendMessage("/topic/game/" + props.gameId, JSON.stringify(selfMsg));
       props.close();
       return true;

@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import { AuthContext } from "./authProvider";
+import React from 'react';
 import SockJsClient from "react-stomp";
+import logger from '../logger';
 
 export const NotificationContext = React.createContext();
 
@@ -13,15 +13,12 @@ function NotificationProvider({ children }) {
         client: null
     })
 
-    const authContext = useContext(AuthContext);
-
     const onMessageReceive = (msg, topic) => {
-        console.log([...state.notifications, msg]);
+        logger.log('NotificationProvider -> onMessageReceive', `Got new message. content: ${msg}`);
         setState({ ...state, notifications: [...state.notifications, msg] })
     }
 
     const initClient = client => {
-        console.log("init client: ", client);
         if (!state.clientConnected && client) {
             setState({ ...state, client: client, clientConnected: true });
         }

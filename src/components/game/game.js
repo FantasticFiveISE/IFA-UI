@@ -15,13 +15,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import useStyles from "./gameStyle";
 import CreateGameEventModal from "../../components/newGameEventModal/newGameEventModal";
 import { NotificationContext } from "../../providers/notificationProvider";
+import { AuthContext } from "../../providers/authProvider";
+
+import logger from '../../logger';
 
 export default function Game(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [expanded, setExpanded] = React.useState(false);
   const [createGameEventOpen, setOpen] = React.useState(false);
   const notificationContext = useContext(NotificationContext);
+  const authContext = useContext(AuthContext);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,11 +32,6 @@ export default function Game(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
   };
 
   const downloadTxtFile = async () => {
@@ -50,6 +48,7 @@ export default function Game(props) {
   };
 
   const handleFollow = async (gameId) => {
+    logger.log('Game -> handleFollow', `Add follower: ${authContext.state.user.username} to gameId: ${gameId}`);
     notificationContext.setState(
       {
         ...notificationContext.state,
@@ -71,12 +70,11 @@ export default function Game(props) {
       <Card className={classes.root}>
         <CardHeader
           action={
-            <IconButton aria-label="settings" onClick={handleClick}>
+            authContext.state.user && <IconButton aria-label="settings" onClick={handleClick}>
               <MoreVertIcon />
             </IconButton>
           }
-        //title={props.teamName}
-        //subheader={props.teamStatus}
+          title={`${props.hostTeam} - ${props.guestTeam}`}
         />
 
         <CardContent>
@@ -122,20 +120,19 @@ export default function Game(props) {
                 <p className={classes.catagoryUl}>{props.gameScore}</p>
               </div>
             </div>
-
           </div>
         </CardContent>
-        <Menu
+        {authContext.state.user !== null && <Menu
           id="simple-menu"
           anchorEl={anchorEl}
           keepMounted
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleModalOpen}>Add Event</MenuItem>
-          <MenuItem onClick={downloadTxtFile}>Create Report</MenuItem>
+          {props.canEdit && <MenuItem onClick={handleModalOpen}>Add Event</MenuItem>}
+          {props.canEdit && <MenuItem onClick={downloadTxtFile}>Create Report</MenuItem>}
           <MenuItem onClick={() => handleFollow(props.gameId)}>Follow Game</MenuItem>
-        </Menu>
+        </Menu>}
       </Card>
 
       <CreateGameEventModal gameId={props.gameId} gameName={`${props.hostTeam}-${props.guestTeam}`} open={createGameEventOpen} close={handleModalClose} />

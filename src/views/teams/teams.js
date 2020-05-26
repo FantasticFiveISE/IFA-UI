@@ -45,7 +45,6 @@ export default function () {
     <div>
       <ul>
         {teams.map((team) => {
-          //console.log(team);
           return (
             <Team
               key={team.teamName}

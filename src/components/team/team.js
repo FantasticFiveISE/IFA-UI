@@ -10,7 +10,6 @@ import PlaceIcon from "@material-ui/icons/Place";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import useStyles from "./teamStyle";
-import { AuthContext } from "../../providers/authProvider";
 
 export default function Team(props) {
   const classes = useStyles();

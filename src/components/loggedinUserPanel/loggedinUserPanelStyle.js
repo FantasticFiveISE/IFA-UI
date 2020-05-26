@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   loggedin: {
-    right: "0",
+    right: "5%",
     position: "absolute",
     marginTop: "1%",
     width: "266px",
