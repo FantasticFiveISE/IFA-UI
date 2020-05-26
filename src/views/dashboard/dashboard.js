@@ -24,15 +24,15 @@ export default function Dashboard() {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
 
-  // const [createSeasonOpen, setOpen] = useState(false);
+  const [createSeasonOpen, setOpen] = useState(false);
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className={classes.root}>
@@ -57,11 +57,11 @@ export default function Dashboard() {
               Logout
             </Link>
 
-        {/* <Badge badgeContent={11} color="secondary" onClick={handleOpen}>
+        <Badge badgeContent={11} color="secondary" onClick={handleOpen}>
           <NotificationsIcon />
         </Badge>
 
-        <CreateAlertModal open={createSeasonOpen} close={handleClose} /> */}
+        <CreateAlertModal open={createSeasonOpen} close={handleClose} />
 
           </div>
         ) : null}

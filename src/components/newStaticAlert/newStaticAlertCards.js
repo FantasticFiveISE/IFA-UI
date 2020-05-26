@@ -51,10 +51,10 @@ export default function NewAlertForm(props) {
 
   return values.initialize ? (
     <div className={classes.root}>
-      <h1>Notifications you have missed:</h1>
+      <h2>Notifications you have missed:</h2>
       {values.alertsMessages.map((league, index) => (
         <div className={classes.formRow} key={index}>
-            <h3 id={league} value={league}>{index+1} - {league}</h3>
+            <h5 id={league} value={league}>{index+1} - {league}</h5>
         </div>
       ))}    
       <button type="button" className={classes.submit} onClick={props.close}>
