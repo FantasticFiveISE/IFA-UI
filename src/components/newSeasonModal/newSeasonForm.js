@@ -26,24 +26,15 @@ export default function NewSeasonForm(props) {
     ]);
     //console.log(leagues);
 
-<<<<<<< HEAD
-    // console.log(leagues);
-=======
     //console.log(leagues.leagueName);
->>>>>>> implement-notifications
     setValues({ ...values, leagues: leagues, initialize: true });
     //console.log(values.leagues);
   };
 
   const handleSeasonsChange = (event) => {
     const league = event.target.value;
-<<<<<<< HEAD
-    console.log(values.selectedLeague);
-    if (values.selectedLeague && values.selectedLeague.indexOf(league) >= 0) {
-=======
     //console.log(values.selectedLeagues);
     if (values.selectedLeagues && values.selectedLeagues.indexOf(league) >= 0) {
->>>>>>> implement-notifications
    //
     } else {
       setValues({
@@ -51,11 +42,7 @@ export default function NewSeasonForm(props) {
         selectedLeague:  league,
       });
     }
-<<<<<<< HEAD
-    console.log(values.selectedLeague);
-=======
     //(values.selectedLeagues);
->>>>>>> implement-notifications
 
   };
 
@@ -66,12 +53,7 @@ export default function NewSeasonForm(props) {
         schedulePolicy: policy,
         
       });
-<<<<<<< HEAD
-      console.log(values.schedulePolicy);
-      console.log(values);
-=======
       //console.log(values.schedulePolicy);
->>>>>>> implement-notifications
 
   };
 
