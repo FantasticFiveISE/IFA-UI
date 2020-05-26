@@ -32,11 +32,11 @@ export default function Team(props) {
   return (
     <Card className={classes.root}>
       <CardHeader
-        action={
-          <IconButton aria-label="settings" onClick={handleClick}>
-            <MoreVertIcon />
-          </IconButton>
-        }
+        // action={
+        //   <IconButton aria-label="settings" onClick={handleClick}>
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title={props.teamName}
         subheader={props.teamStatus}
       />
