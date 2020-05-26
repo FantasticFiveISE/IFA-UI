@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Menu from "../../components/menu/menu";
 import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
@@ -12,8 +12,10 @@ import Link from "@material-ui/core/Link";
 import { AuthContext } from "../../providers/authProvider";
 import Login from "../login/Login";
 import Games from "../games/games";
+import Badge from "@material-ui/core/Badge";
 
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import CreateAlertModal from "../../components/newStaticAlert/newStaticAlertModal";
 
 
 const hist = createBrowserHistory();
@@ -21,6 +23,16 @@ const hist = createBrowserHistory();
 export default function Dashboard() {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
+
+  // const [createSeasonOpen, setOpen] = useState(false);
+
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <div className={classes.root}>
@@ -44,9 +56,13 @@ export default function Dashboard() {
             >
               Logout
             </Link>
-            <Link href="/">
-            <NotificationsIcon/>
-            </Link>
+
+        {/* <Badge badgeContent={11} color="secondary" onClick={handleOpen}>
+          <NotificationsIcon />
+        </Badge>
+
+        <CreateAlertModal open={createSeasonOpen} close={handleClose} /> */}
+
           </div>
         ) : null}
         <main className={classes.content}>
