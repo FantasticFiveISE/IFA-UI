@@ -22,17 +22,17 @@ export default function Login() {
   function handleSubmit(event) {
     // TODO: validate inputes
     event.preventDefault();    
-    API.login(Response.username, Response.password)
+    API.login(user, password)
       .then((user) => {
         authContext.setState({ isLoading: true });
-        console.log("user", JSON.stringify(user));
+        //console.log("user", JSON.stringify(user));
         authContext.setState({ user: user, isLoading: false });
         history.push("/");
         setError(false);
 
       })
       .catch((error) => {// TODO: Handle errors
-        console.log(error);  
+        //console.log(error);  
         setError(true);
         // authContext.setState({ error: error, isLoading: false });
       }

@@ -12,12 +12,16 @@ import Link from "@material-ui/core/Link";
 import { AuthContext } from "../../providers/authProvider";
 import Login from "../login/Login";
 import Games from "../games/games";
+<<<<<<< HEAD
 import Badge from "@material-ui/core/Badge";
 
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CreateAlertModal from "../../components/newStaticAlert/newStaticAlertModal";
 
 
+=======
+import LoggedinUserPanel from "../../components/loggedinUserPanel/loggedinUserPanel";
+>>>>>>> implement-notifications
 const hist = createBrowserHistory();
 
 export default function Dashboard() {
@@ -47,6 +51,7 @@ export default function Dashboard() {
           </div>
         )}
         {authContext.state.user ? (
+<<<<<<< HEAD
           <div className={classes.login}>
             Hello {authContext.state.user.name}, {"   "}
             <Link
@@ -64,6 +69,9 @@ export default function Dashboard() {
         <CreateAlertModal open={createSeasonOpen} close={handleClose} />
 
           </div>
+=======
+          <LoggedinUserPanel authContext={authContext} />
+>>>>>>> implement-notifications
         ) : null}
         <main className={classes.content}>
           <Switch>

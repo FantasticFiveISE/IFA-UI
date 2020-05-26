@@ -22,10 +22,11 @@ export default function () {
             <div>
                 <ul>
                     {games.map((game) => {
-                        console.log(game);
+                        //console.log(game);
                         return (
                             <Game
                                 key={game.gameId}
+                                gameId={game.gameId}
                                 hostTeam={game.hostTeam}
                                 guestTeam={game.guestTeam}
                                 field={game.field}
