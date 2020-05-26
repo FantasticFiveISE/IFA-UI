@@ -36,7 +36,7 @@ export default function CreateEventModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <NewGameEventForm close={props.close} />
+      <NewGameEventForm close={props.close} gameId={props.gameId} gameName={props.gameName}/>
     </div>
   );
 
