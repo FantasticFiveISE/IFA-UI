@@ -11,7 +11,11 @@ import useStyles from "./dashboardStyle";
 import Link from "@material-ui/core/Link";
 import { AuthContext } from "../../providers/authProvider";
 import Login from "../login/Login";
-import Games from "../games/games"
+import Games from "../games/games";
+
+import NotificationsIcon from '@material-ui/icons/Notifications';
+
+
 const hist = createBrowserHistory();
 
 export default function Dashboard() {
@@ -39,6 +43,9 @@ export default function Dashboard() {
               }}
             >
               Logout
+            </Link>
+            <Link href="/">
+            <NotificationsIcon/>
             </Link>
           </div>
         ) : null}
