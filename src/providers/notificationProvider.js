@@ -16,6 +16,7 @@ function NotificationProvider({ children }) {
     const onMessageReceive = (msg, topic) => {
         logger.log('NotificationProvider -> onMessageReceive', `Got new message. content: ${msg}`);
         setState({ ...state, notifications: [...state.notifications, msg] })
+        // On login, we need to set notification array like this: [...state.notifications, msg]: notificationContext.setState({ ...state, notifications: user.norification }))
     }
 
     const initClient = client => {
@@ -24,8 +25,10 @@ function NotificationProvider({ children }) {
         }
         return null;
     }
+    logger.log('NotificationProvider -> topics', `Got topics: ${state.topics}`);
 
     return (
+        //console.log(state.topics),
         <NotificationContext.Provider value={{ state, setState }}>
             {
                 children

@@ -12,6 +12,7 @@ function Alert(props) {
 }
 export default function Login() {
   const authContext = useContext(AuthContext);
+
   const history = useHistory(); // using the
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -20,23 +21,22 @@ export default function Login() {
   // validation of the form + submit is pressed
   function handleSubmit(event) {
     // TODO: validate inputes
-    event.preventDefault();    
+    event.preventDefault();
     API.login(user, password)
       .then((user) => {
-        authContext.setState({ isLoading: true });
-        //console.log("user", JSON.stringify(user));
+        console.log("user", JSON.stringify(user));
         authContext.setState({ user: user, isLoading: false });
         history.push("/");
         setError(false);
-
+        return user;
       })
       .catch((error) => {// TODO: Handle errors
         //console.log(error);  
         setError(true);
         // authContext.setState({ error: error, isLoading: false });
       }
-      ); 
-
+      );
+    authContext.setState({ isLoading: true });
   }
 
   return (
