@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -16,6 +16,8 @@ import useStyles from "./gameStyle";
 import CreateGameEventModal from "../../components/newGameEventModal/newGameEventModal";
 import { NotificationContext } from "../../providers/notificationProvider";
 import { AuthContext } from "../../providers/authProvider";
+import { formatMessage } from '../../utils';
+import SockJsClient from "react-stomp";
 
 import logger from '../../logger';
 
@@ -25,6 +27,8 @@ export default function Game(props) {
   const [createGameEventOpen, setOpen] = React.useState(false);
   const notificationContext = useContext(NotificationContext);
   const authContext = useContext(AuthContext);
+  const [events, setEvents] = React.useState(null);
+  let clientRef;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,9 +38,22 @@ export default function Game(props) {
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    if (events === null) {
+      setEvents(props.gameEvents.map(event => formatMessage(event)));
+    }
+  }, [])
+
+  const addEventToGame = (gameEvent) => {
+    logger.log("Game -> addEventToGame: ", gameEvent);
+    logger.log("Game -> addEventToGame, Events: ", events);
+
+    setEvents([...events, gameEvent]);
+  }
+
   const downloadTxtFile = async () => {
     const fileName = "report";
-    const json = JSON.stringify(props.gameEvents);
+    const json = JSON.stringify(events);
     const blob = new Blob([json], { type: 'application/json' });
     const href = await URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -50,6 +67,7 @@ export default function Game(props) {
 
   const handleFollow = async (gameId) => {
     logger.log('Game -> handleFollow', `Add follower: ${authContext.state.user.username} to gameId: ${gameId}`);
+
     notificationContext.setState(
       {
         ...notificationContext.state,
@@ -101,9 +119,9 @@ export default function Game(props) {
               <div className={classes.catagory}>
                 <EventNoteIcon />
                 <ul className={classes.catagoryUl}>
-                  {props.gameEvents.map((event) => (
+                  {events && events.map((event) => (
                     <li key={event.id} className={classes.catagoryLi}>
-                      {event.id}, {event.dateTime.replace('T', ' ')}, {event.gameMinutes}, {event.eventName}, {event.description}
+                      {event.split('\n').map((line, i) => <p className={i===0 && classes.eventFirstLine}>{line}</p>)}
                     </li>
                   ))}
                 </ul>
@@ -137,7 +155,11 @@ export default function Game(props) {
           <MenuItem onClick={() => handleFollow(props.gameId)}>Follow Game</MenuItem>
         </Menu>}
       </Card>
-
+      <SockJsClient url="http://localhost:8080/notifications" topics={["/topic/game/register/" + props.gameId]}
+        onMessage={addEventToGame} ref={(client) => { clientRef = client }}
+        onConnect={() => { }}
+        onDisconnect={() => { }}
+        debug={false} />
       <CreateGameEventModal gameId={props.gameId} gameName={`${props.hostTeam}-${props.guestTeam}`} open={createGameEventOpen} close={handleModalClose} />
 
 

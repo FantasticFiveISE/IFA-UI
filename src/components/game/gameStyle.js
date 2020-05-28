@@ -35,8 +35,12 @@ export default makeStyles((theme) => ({
     padding: "0",
     margin: "1% 0 0 4%",
   },
+  eventFirstLine: {
+    fontWeight: 'bold',
+    marginTop: 0
+  },
   catagoryLi: {
-    marginBottom: "35%",
+    marginBottom: "10%",
   },
   contentContainer: {
     display: "flex",

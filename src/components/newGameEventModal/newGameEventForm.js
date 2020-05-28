@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useStyles } from "../newTeamModal/useStyles";
 import { NotificationContext } from "../../providers/notificationProvider";
+import {formatMessage} from '../../utils';
 
 export default function NewGameEventForm(props) {
   const classes = useStyles();
@@ -13,6 +14,8 @@ export default function NewGameEventForm(props) {
   });
 
   const notificationContext = useContext(NotificationContext);
+
+
 
 
   // Move to submit

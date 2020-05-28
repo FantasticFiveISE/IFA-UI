@@ -31,19 +31,21 @@ export default [
                 "refereeDetails": "Qualification: 0\nType: null"
             }
         ],
-        "gameEvents": [
+        "gameEvents":[
             {
-                "id": 1,
-                "dateTime": "2020-05-22T22:41:00",
-                "gameMinutes": 60,
-                "eventName": "GOAL",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "60",
+                "event": "GOAL",
                 "description": "Messi did goal"
             },
             {
-                "id": 2,
-                "dateTime": "2020-05-22T22:56:00",
-                "gameMinutes": 75,
-                "eventName": "INJURY",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "75",
+                "event": "INJURY",
                 "description": "Yossi Benayoun got injured"
             }
         ],
@@ -81,19 +83,21 @@ export default [
                 "refereeDetails": "Qualification: 0\nType: null"
             }
         ],
-        "gameEvents": [
+        "gameEvents":[
             {
-                "id": 1,
-                "dateTime": "2020-05-22T22:41:00",
-                "gameMinutes": 60,
-                "eventName": "GOAL",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "60",
+                "event": "GOAL",
                 "description": "Messi did goal"
             },
             {
-                "id": 2,
-                "dateTime": "2020-05-22T22:56:00",
-                "gameMinutes": 75,
-                "eventName": "INJURY",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "75",
+                "event": "INJURY",
                 "description": "Yossi Benayoun got injured"
             }
         ],
@@ -131,19 +135,21 @@ export default [
                 "refereeDetails": "Qualification: 0\nType: null"
             }
         ],
-        "gameEvents": [
+        "gameEvents":[
             {
-                "id": 1,
-                "dateTime": "2020-05-22T22:41:00",
-                "gameMinutes": 60,
-                "eventName": "GOAL",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "60",
+                "event": "GOAL",
                 "description": "Messi did goal"
             },
             {
-                "id": 2,
-                "dateTime": "2020-05-22T22:56:00",
-                "gameMinutes": 75,
-                "eventName": "INJURY",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "75",
+                "event": "INJURY",
                 "description": "Yossi Benayoun got injured"
             }
         ],
@@ -181,19 +187,21 @@ export default [
                 "refereeDetails": "Qualification: 0\nType: null"
             }
         ],
-        "gameEvents": [
+        "gameEvents":[
             {
-                "id": 1,
-                "dateTime": "2020-05-22T22:41:00",
-                "gameMinutes": 60,
-                "eventName": "GOAL",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "60",
+                "event": "GOAL",
                 "description": "Messi did goal"
             },
             {
-                "id": 2,
-                "dateTime": "2020-05-22T22:56:00",
-                "gameMinutes": 75,
-                "eventName": "INJURY",
+                "date": "2020-05-27T21:23",
+                "gameId": "1",
+                "gameName": "teamA - teamB",
+                "minutes": "75",
+                "event": "INJURY",
                 "description": "Yossi Benayoun got injured"
             }
         ],
