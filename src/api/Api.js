@@ -24,6 +24,23 @@ async function postData(url = '', data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
+async function getData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    // body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
 class API {
   ENDPOINT = "http://localhost:8080";
 
@@ -44,13 +61,12 @@ class API {
 
   // Teams API
   getAllTeams = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(teamsResponse);
-      }, 200);
-    });
-
-
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(teamsResponse);
+    //   }, 200);
+    // });
+    return getData(this.ENDPOINT + '/teams');
   };
 
   createTeam = () => { };
@@ -58,30 +74,34 @@ class API {
   // Leagues API
   getLeagues = async (params) => {
     // Need to filter by params in better way
-    if (params.available) {
-      //fecth("get", ENDPOINT + /players?available=true);
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(leaguesResponse);
-        }, 200);
-      });
-    } else {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(leaguesResponse);
-        }, 200);
-      });
-    }
+    // if (params.available) {
+    //   //fecth("get", ENDPOINT + /players?available=true);
+    //   return new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       resolve(leaguesResponse);
+    //     }, 200);
+    //   });
+    // } else {
+    //   return new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       resolve(leaguesResponse);
+    //     }, 200);
+    //   });
+    // }
+    return getData(this.ENDPOINT + '/leagues');
+
   };
   updateLeague = () => { };
 
   // Games API
   getRefereeGames = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(gameResponse);
-      }, 200);
-    });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(gameResponse);
+    //   }, 200);
+    // });
+    return getData(this.ENDPOINT + '/games');
+
   };
   updateGame = () => { };
 

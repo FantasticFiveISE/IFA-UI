@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import API from "../../api/mock/Api";
+import API from "../../api/Api";
 import Team from "../../components/team/team";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
@@ -27,6 +27,7 @@ export default function () {
 
   const getTeams = async () => {
     const response = await API.getAllTeams();
+    console.log(response);
     setTeams(response);
   };
 
