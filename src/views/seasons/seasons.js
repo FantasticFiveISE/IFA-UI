@@ -54,7 +54,7 @@ export default function () {
               schedulingMethod={league.schedulingMethod}
               season={league.season}
               teamsInLeaguePerSeason={league.teamsInLeaguePerSeason}
-
+              index ={index}
             />
           );
         })}

@@ -2,16 +2,13 @@ import React, { useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
-import WorkIcon from "@material-ui/icons/Work";
-import PlaceIcon from "@material-ui/icons/Place";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import useStyles from "../team/teamStyle";
-
-export default function Team(props) {
+import SortIcon from '@material-ui/icons/Sort';
+import GavelIcon from '@material-ui/icons/Gavel';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import TocIcon from '@material-ui/icons/Toc';
+import GroupIcon from '@material-ui/icons/Group';
+export default function Season(props) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -32,56 +29,55 @@ export default function Team(props) {
   return (
     <Card className={classes.root}>
       <CardHeader
-        // action={
-        //   <IconButton aria-label="settings" onClick={handleClick}>
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
         title={props.leagueName}
-        // subheader={props.teamStatus}
+        subheader={props.begin}
       />
 
       <CardContent>
         <div className={classes.contentContainer}>
-          <div className={classes.contentCol}>
-            <div className={classes.catagory}>
-              <DirectionsRunIcon />
-              <ul className={classes.catagoryUl}>
-                {/* {props.players.map((player) => (
-                  <li key={player.name} className={classes.catagoryLi}>
-                    {player.name}
-                  </li>
-                ))} */}
-              </ul>
+            <div className={classes.contentCol}>
+                {/* season */}
+                <div className={classes.catagory}>
+                    <ScheduleIcon/>
+                    <ul className={classes.catagoryUl}>
+                    <p key = {props.index}className={classes.catagoryUl}>{props.season}</p>
+                    </ul>
+                </div>
+                {/* schedulingMethod */}
+                <div className={classes.catagory}>
+                    <TocIcon/>
+                    <ul className={classes.catagoryUl}>
+                    <p key = {props.index}className={classes.catagoryUl}>{props.schedulingMethod.schedulingMethodName}</p>
+                    </ul>
+                </div>
+                {/* rankingMethod */}
+                <div className={classes.catagory}>
+                    <SortIcon/>
+                    <ul className={classes.catagoryUl}>
+                    <p key = {props.index}className={classes.catagoryUl}>Win:{props.rankingMethod.winPoints}</p>
+                    <p key = {props.index + 1}className={classes.catagoryUl}>Draw:{props.rankingMethod.drawPoints}</p>
+                    <p key = {props.index+ 2}className={classes.catagoryUl}>Lose:{props.rankingMethod.losePoints}</p>
+                    </ul>
+                </div>
+                
+                {/* teamsInLeaguePerSeason */}
+                <div className={classes.catagory}>
+                    <GroupIcon/>
+                    <ul className={classes.catagoryUl}>
+                    <p key = {props.index}className={classes.catagoryUl}>{props.teamsInLeaguePerSeason}</p>
+                    </ul>
+                </div>
+                {/* referee */}
+                <div className={classes.catagory}>
+                    <GavelIcon/>
+                    <ul className={classes.catagoryUl}>
+                    <p key = {props.index} className={classes.catagoryUl}>{props.referees}</p>
+                    </ul>
+                </div>
             </div>
-            <div className={classes.catagory}>
-              <WorkIcon />
-              <ul className={classes.catagoryUl}>
-                {/* {props.managers.map((manager) => (
-                  <li key={manager.name} className={classes.catagoryLi}>
-                    {manager.name}
-                  </li>
-                ))} */}
-              </ul>
-            </div>
-          </div>
-          <div className={classes.contentCol}>
-            <div className={classes.catagory}>
-              <PlaceIcon />
-              {/* <p className={classes.catagoryUl}>{props.schedulingMethod}</p> */}
-            </div>
-          </div>
+          
         </div>
       </CardContent>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Edit team</MenuItem>
-      </Menu>
     </Card>
   );
 }
