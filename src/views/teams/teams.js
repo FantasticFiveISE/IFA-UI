@@ -8,6 +8,9 @@ import CreateTeamModal from "../../components/newTeamModal/newTeamModal";
 import { AuthContext } from "../../providers/authProvider";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    overflow: 'hidden' /* Hide scrollbars */
+  },
   createTeam: {
     position: "fixed",
     bottom: "10%",
@@ -42,10 +45,9 @@ export default function () {
   return teams.length < 0 ? (
     <div>in Teams</div>
   ) : (
-    <div>
+    <div className={classes.root}>
       <ul>
         {teams.map((team) => {
-          console.log(team);
           return (
             <Team
               key={team.teamName}

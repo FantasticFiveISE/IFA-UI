@@ -1,29 +1,149 @@
-export default function API() {
+import loginResponse from "./mock/resources/loginResponse";
+import teamsResponse from "./mock//resources/teamsResponse";
+import playersResponse from "./mock/resources/playersResponse";
+import leaguesResponse from "./mock/resources/leaguesResponse";
+import coachesResponse from "./mock/resources/coachesResponse";
+import fieldsResponse from "./mock/resources/fieldsResponse";
+import gameResponse from "./mock/resources/gameResponse";
 
-    const ENDPOINT = "localhost:8080";
-  
-    // Auth API
-    const login = () => {
-      // POST to /login with body: {username: <username: string>, password: <password: string>}
-    };
-    const logout = () => {
-      // POST to /logout with username? 
-    };
-    const resigter = () => {
-      // POST to /register with all things
-  
-    };
-  
-    // Teams API
-    const getAllTeams = () => {};
-    const createTeam = () => {};
-  
-    // Leagues API
-    const getLeagues = () => {};
-    const updateLeague = () => {};
-  
-    // Games API
-    const getGames = () => {};
-    const updateGame = () => {};
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
+class API {
+  ENDPOINT = "http://localhost:8080";
+
+  // Auth API
+  //TODO: deleted autherized 
+  // autherized is mock 
+  login = (username, password) => {
+    let autherized = true;
+    return postData(this.ENDPOINT + '/login', { username, password });
+  };
+
+  logout = () => {
+    // POST to /logout with username?
+  }; //
+  resigter = () => {
+    // POST to /register with all things
+  };
+
+  // Teams API
+  getAllTeams = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(teamsResponse);
+      }, 200);
+    });
+
+
+  };
+
+  createTeam = () => { };
+
+  // Leagues API
+  getLeagues = async (params) => {
+    // Need to filter by params in better way
+    if (params.available) {
+      //fecth("get", ENDPOINT + /players?available=true);
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(leaguesResponse);
+        }, 200);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(leaguesResponse);
+        }, 200);
+      });
+    }
+  };
+  updateLeague = () => { };
+
+  // Games API
+  getRefereeGames = async () => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(gameResponse);
+      }, 200);
+    });
+  };
+  updateGame = () => { };
+
+  // players Api
+  getPlayers = async (params) => {
+    // Need to filter by params in better way
+    if (params.available) {
+      //fecth("get", ENDPOINT + /players?available=true);
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(playersResponse);
+        }, 200);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(playersResponse);
+        }, 200);
+      });
+    }
+  };
+
+  followGame = async (params) => {
+
   }
-  
+
+  // GET /coaches?available=true
+  // GET /stadium?available=true
+
+  getCoaches = async (params) => {
+    // Need to filter by params in better way
+    if (params.available) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(coachesResponse);
+        }, 200);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(coachesResponse);
+        }, 200);
+      });
+    }
+  };
+
+  getFields = async (params) => {
+    // Need to filter by params in better way
+    if (params.available) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(fieldsResponse);
+        }, 200);
+      });
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(fieldsResponse);
+        }, 200);
+      });
+    }
+  };
+
+}
+export default new API();

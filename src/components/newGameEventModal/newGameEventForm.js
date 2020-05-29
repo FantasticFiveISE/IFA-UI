@@ -1,49 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 import { useStyles } from "../newTeamModal/useStyles";
-import Api from "../../api/mock/Api";
+import { NotificationContext } from "../../providers/notificationProvider";
+import {formatMessage} from '../../utils';
 
 export default function NewGameEventForm(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
+    gameId: props.gameId,
+    gameName: props.gameName,
     minutes: "",
-    event: "",
-    description:"",
-    initialize: false,
+    event: "Goal",
+    description: "",
   });
 
-  useEffect(() => {
-    loadData();
-  }, []);
-  //TODO: delete
-  const loadData = async () => {
-    const [leagues] = await Promise.all([
-      Api.getLeagues({ ...values, available: true }),
-    ]);
-    console.log(leagues);
+  const notificationContext = useContext(NotificationContext);
 
-    console.log(leagues.leagueName);
-    setValues({ ...values, leagues: leagues, initialize: true });
-    console.log(values.leagues);
+
+
+
+  // Move to submit
+  const sendMessage = (msg, selfMsg) => {
+    try {
+      notificationContext.state.client.sendMessage("/topic/game/" + props.gameId, JSON.stringify(selfMsg));
+      props.close();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+
+  const handleSubmit = (notification) => {
+    sendMessage("", notification);
   };
 
-
-
-  const handleSubmit = (event) => {
-    console.log(values);
-
-    //Post request
-  };
-  
-  return values.initialize ? (
+  return  (
     <div className={classes.root}>
       <h1>Please fill these form accourding to the game event</h1>
       <div className={classes.formRow}>
         <h3>Enter the minutes in game:</h3>
-        <input className={classes.input} type="number" placeholder="MM" min="0" max="90" onChange={(e) => setValues({...values,minutes:  e.target.value})} required/>
+        <input className={classes.input} type="number" placeholder="MM" min="0" max="90" onChange={(e) => setValues({ ...values, minutes: e.target.value })} required />
       </div>
       <div className={classes.formRow}>
         <h3>Choose an event:</h3>
-        <select onChange={(e) => setValues({...values,event:  e.target.value})}>
+        <select onChange={(e) => setValues({ ...values, event: e.target.value })}>
           <option value="Goal">Goal</option>
           <option value="Offside">Offside</option>
           <option value="Foul">Foul</option>
@@ -58,15 +58,13 @@ export default function NewGameEventForm(props) {
 
       <div className={classes.formRow}>
         <h3>Enter a description of the event:</h3>
-        <input className={classes.input} type="text" placeholder="Goal By messi" onChange={(e) => setValues({...values,description:  e.target.value})}  required />
+        <input className={classes.input} type="text" placeholder="Goal By messi" onChange={(e) => setValues({ ...values, description: e.target.value })} required />
       </div>
 
-        {/* TODO: handle submit ONCLICK */}
-      <button type="submit" className={classes.submit} onClick={props.close}>
+      {/* TODO: handle submit ONCLICK */}
+      <button type="submit" className={classes.submit} onClick={() => handleSubmit(values)}>
         Submit
       </button>
     </div>
-  ) : (
-    <div>Loading...</div>
   );
 }

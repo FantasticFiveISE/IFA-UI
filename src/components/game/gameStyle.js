@@ -4,7 +4,9 @@ import { red } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    marginRight: '10%',
+    marginBottom: '20px',
+    backgroundColor: '#fafafa'
   },
   media: {
     height: 0,
@@ -33,8 +35,12 @@ export default makeStyles((theme) => ({
     padding: "0",
     margin: "1% 0 0 4%",
   },
+  eventFirstLine: {
+    fontWeight: 'bold',
+    marginTop: 0
+  },
   catagoryLi: {
-    marginBottom: "35%",
+    marginBottom: "10%",
   },
   contentContainer: {
     display: "flex",

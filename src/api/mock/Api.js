@@ -14,19 +14,23 @@ class API {
   //TODO: deleted autherized 
   // autherized is mock 
   login = (username, password) => {
-    let autherized = false;
-    if(autherized){
+    let autherized = true;
+    if (autherized) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(loginResponse);
+          resolve(
+            {
+              ...loginResponse, username: username
+            }
+          );
         }, 200);
       });
-    }else{
+    } else {
       return new Promise((resolve, reject) => { // eslint-disable-line no-unused-vars
         setTimeout(() => {
-            reject(new Error("invalid info: please check userName or password!"));
+          reject(new Error("invalid info: please check userName or password!"));
         }, 200);
-    });
+      });
     }
   };
 
@@ -45,15 +49,15 @@ class API {
       }, 200);
     });
 
-    
+
   };
 
-  createTeam = () => {};
+  createTeam = () => { };
 
   // Leagues API
   getLeagues = async (params) => {
     // Need to filter by params in better way
-    if (params.available) {  
+    if (params.available) {
       //fecth("get", ENDPOINT + /players?available=true);
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -68,7 +72,7 @@ class API {
       });
     }
   };
-  updateLeague = () => {};
+  updateLeague = () => { };
 
   // Games API
   getRefereeGames = async () => {
@@ -78,12 +82,12 @@ class API {
       }, 200);
     });
   };
-  updateGame = () => {};
+  updateGame = () => { };
 
   // players Api
   getPlayers = async (params) => {
     // Need to filter by params in better way
-    if (params.available) {  
+    if (params.available) {
       //fecth("get", ENDPOINT + /players?available=true);
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -99,12 +103,16 @@ class API {
     }
   };
 
+  followGame = async(params) => {
+    
+  }
+
   // GET /coaches?available=true
   // GET /stadium?available=true
 
   getCoaches = async (params) => {
     // Need to filter by params in better way
-    if (params.available) {  
+    if (params.available) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(coachesResponse);
@@ -121,7 +129,7 @@ class API {
 
   getFields = async (params) => {
     // Need to filter by params in better way
-    if (params.available) {  
+    if (params.available) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(fieldsResponse);
