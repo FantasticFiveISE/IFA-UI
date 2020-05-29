@@ -22,7 +22,7 @@ export default function () {
   const [createSeasonOpen, setOpen] = useState(false);
 
   const getLeagues = async () => {
-    const response = await API.getLeagues(true);
+    const response = await API.getLeagues({available: true});
     setLeagues(response);
     };
 

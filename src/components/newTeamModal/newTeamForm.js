@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useStyles } from "./useStyles";
-import Api from "../../api/mock/Api";
+import Api from "../../api/Api";
 
 export default function NewTeamForm(props) {
   const classes = useStyles();
