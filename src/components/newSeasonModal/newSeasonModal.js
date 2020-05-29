@@ -43,6 +43,7 @@ export default function CreateSeasonModal(props) {
   return (
     <Modal
       open={props.open}
+      onClose={props.close}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >

@@ -61,8 +61,8 @@ export default function () {
           );
         })}
       </ul>
-      {authContext.state.user &&
-      authContext.state.user.roles.indexOf("FAN") >= 0 ? (
+      {(authContext.state.user &&
+      authContext.state.user.roles.indexOf("FAN") >= 0 )? (
         <div className={classes.createTeam}>
           <Fab color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />

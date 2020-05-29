@@ -4,10 +4,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import useStyles from "../team/teamStyle";
 import SortIcon from '@material-ui/icons/Sort';
-import GavelIcon from '@material-ui/icons/Gavel';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import TocIcon from '@material-ui/icons/Toc';
-import GroupIcon from '@material-ui/icons/Group';
 export default function Season(props) {
   const classes = useStyles();
 
@@ -57,21 +55,6 @@ export default function Season(props) {
                     <p key = {props.index}className={classes.catagoryUl}>Win:{props.rankingMethod.winPoints}</p>
                     <p key = {props.index + 1}className={classes.catagoryUl}>Draw:{props.rankingMethod.drawPoints}</p>
                     <p key = {props.index+ 2}className={classes.catagoryUl}>Lose:{props.rankingMethod.losePoints}</p>
-                    </ul>
-                </div>
-                
-                {/* teamsInLeaguePerSeason */}
-                <div className={classes.catagory}>
-                    <GroupIcon/>
-                    <ul className={classes.catagoryUl}>
-                    <p key = {props.index}className={classes.catagoryUl}>{props.teamsInLeaguePerSeason}</p>
-                    </ul>
-                </div>
-                {/* referee */}
-                <div className={classes.catagory}>
-                    <GavelIcon/>
-                    <ul className={classes.catagoryUl}>
-                    <p key = {props.index} className={classes.catagoryUl}>{props.referees}</p>
                     </ul>
                 </div>
             </div>
