@@ -9,7 +9,13 @@ import { AuthContext } from "../../providers/authProvider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    overflow: 'hidden' /* Hide scrollbars */
+    overflow: 'hidden', /* Hide scrollbars */
+  },
+  teams: {
+    display: 'flex',
+    width: '100%',
+    flexFlow: 'row',
+    flexWrap: 'wrap', 
   },
   createTeam: {
     position: "fixed",
@@ -47,7 +53,7 @@ export default function () {
     <div>in Teams</div>
   ) : (
     <div className={classes.root}>
-      <ul>
+      <ul className={classes.teams}>
         {teams.map((team) => {
           return (
             <Team

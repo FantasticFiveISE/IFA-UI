@@ -1,10 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
-
+import bgImage from "../../assets/img/green-background.jpg"
 
 export default makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 345,
+    height: 400,
+    margin: 20,
+    backgroundImage: `url(${bgImage})`,
+    color: 'white'
   },
   media: {
     height: 0,
