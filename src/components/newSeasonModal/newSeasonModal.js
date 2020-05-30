@@ -8,26 +8,26 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
+  const top = 5;
+  const left = 37;
   return {
     top: `${top}%`,
+    margin: 'auto',
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    // transform: `translate(-${top}%, -${left}%)`,
   };
 }
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: "absolute",
-    width: 400,
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: theme.spacing.unit * 4,
   },
 }));
+
 
 export default function CreateSeasonModal(props) {
   const classes = useStyles();

@@ -50,7 +50,7 @@ export default function Season(props) {
                 </div>
                 {/* rankingMethod */}
                 <div className={classes.catagory}>
-                    <SortIcon/>
+                    <SortIcon />
                     <ul className={classes.catagoryUl}>
                     <p key = {props.index}className={classes.catagoryUl}>Win:{props.rankingMethod.winPoints}</p>
                     <p key = {props.index + 1}className={classes.catagoryUl}>Draw:{props.rankingMethod.drawPoints}</p>

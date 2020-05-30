@@ -4,7 +4,10 @@ import { red } from "@material-ui/core/colors";
 
 export default makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 345,
+    height: 400,
+    margin: 20,
+    backgroundColor: 'rgba(255,255,255,0.9)'
   },
   media: {
     height: 0,
@@ -26,22 +29,40 @@ export default makeStyles((theme) => ({
   catagory: {
     display: "flex",
     flexFlow: "row",
-    marginBottom: "35%",
+    width: '160px',
+    marginBottom: "10%",
   },
   catagoryUl: {
+    width: '100%',
+    maxWidth: 360,
+    position: 'relative',
+    overflow: 'auto',
+    overflowX: 'hidden',
+    maxHeight: '120px',
     listStyleType: "none",
     padding: "0",
     margin: "1% 0 0 4%",
   },
   catagoryLi: {
-    marginBottom: "35%",
+    marginBottom: "10%",
   },
   contentContainer: {
     display: "flex",
     justifyContent: " space-between",
+    width: ' 90%',
+    margin: '0 auto'
   },
   contentCol: {
     display: "flex",
     flexFlow: "column",
   },
+  subtitleOpen: {
+    color: '#27AE60'
+  },
+  subtitleClose: {
+    color: 'e74c3c'
+  },
+  subtitlePending: {
+    color: '#d35400'
+  }
 }));

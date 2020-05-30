@@ -12,3 +12,4 @@ export default makeStyles((theme) => ({
     overflow: 'hidden' /* Hide scrollbars */
   }
 }));
+

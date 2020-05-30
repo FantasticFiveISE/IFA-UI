@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 code {
@@ -15,7 +16,32 @@ code {
 html {
   overflow:   scroll;
 }
-::-webkit-scrollbar {
+:not(ul)::-webkit-scrollbar {
     width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    /* background: transparent;  */
 }
+
+/* width */
+ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+ul::-webkit-scrollbar-track {
+  height: 1px;
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+ul::-webkit-scrollbar-thumb {
+  height: 1px;
+  border-radius: 50px;
+  background: rgb(14, 0, 94); 
+}
+
+/* Handle on hover */
+ul::-webkit-scrollbar-thumb:hover {
+  height: 1px;
+  background: #555; 
+}
+

@@ -3,20 +3,9 @@ import API from "../../api/Api";
 import Team from "../../components/team/team";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import { makeStyles } from "@material-ui/core/styles";
 import CreateTeamModal from "../../components/newTeamModal/newTeamModal";
 import { AuthContext } from "../../providers/authProvider";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    overflow: 'hidden' /* Hide scrollbars */
-  },
-  createTeam: {
-    position: "fixed",
-    bottom: "10%",
-    right: "10%",
-  },
-}));
+import { useStyles } from "./useStyles";
 
 export default function () {
   const classes = useStyles();
@@ -47,7 +36,7 @@ export default function () {
     <div>in Teams</div>
   ) : (
     <div className={classes.root}>
-      <ul>
+      <ul className={classes.teams}>
         {teams.map((team) => {
           return (
             <Team
