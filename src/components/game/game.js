@@ -18,6 +18,7 @@ import { NotificationContext } from "../../providers/notificationProvider";
 import { AuthContext } from "../../providers/authProvider";
 import { formatMessage } from '../../utils';
 import SockJsClient from "react-stomp";
+import API from "../../api/Api";
 
 import logger from '../../logger';
 
@@ -74,6 +75,7 @@ export default function Game(props) {
         topics: [...notificationContext.state.topics, "/topic/game/register/" + gameId]
       }
     );
+    API.followGame(authContext.state.user.username, gameId);
     handleClose();
   }
 

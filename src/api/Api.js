@@ -21,6 +21,12 @@ async function postData(url = '', data = {}) {
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   });
+  if(!response.ok){
+    throw new Error(response.json().status);
+    // return new Error("invalid info: please check userName or password!");
+
+  }
+  console.log(response);
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
@@ -94,8 +100,8 @@ class API {
 
   };
 
-  followGame = async (params) => {
-
+  followGame = async (username, gameId) => {
+    return postData(this.ENDPOINT + '/games/follow', { gameId, username });
   }
 
   // GET /coaches?available=true
