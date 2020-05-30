@@ -68,14 +68,20 @@ class API {
   // Teams API
   getAllTeams = async () => {
     // return getData(this.ENDPOINT + '/teams');
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(teamsResponse);
-      }, 200);
-    });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(teamsResponse);
+    //   }, 200);
+    // });
+    
+    return getData(this.ENDPOINT + '/teams');
+      
   };
 
-  createTeam = () => { };
+  createTeam = (teamName, field, players, coach, owner) => {
+
+    return postData(this.ENDPOINT + '/teams', { teamName, field, players, coach , owner});
+  };
 
   // Leagues API
   getLeagues = async (params) => {
