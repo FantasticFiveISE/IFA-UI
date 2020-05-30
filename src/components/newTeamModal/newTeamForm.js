@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useContext} from "react";
 import { useStyles } from "./useStyles";
 import Api from "../../api/Api";
+import { AuthContext } from "../../providers/authProvider";
 
 export default function NewTeamForm(props) {
   const classes = useStyles();
+  const authContext = useContext(AuthContext);
   const [values, setValues] = React.useState({
     teamName: "",
     players: [],
@@ -30,6 +32,10 @@ export default function NewTeamForm(props) {
       Api.getFields({ ...values, available: true }),
     ]);
     setValues({ ...values, players: players, coaches: coaches, fields: fields, initialize: true });
+    console.log(values);
+    console.log(values.players);
+    console.log(values.coaches);
+    console.log(values.fields);
   };
 
   const handlePlayersChange = (event) => {
@@ -74,13 +80,19 @@ export default function NewTeamForm(props) {
     }
   };
 
+  const handleSubmit = async () =>{
+    console.log(values.teamName, values.selectedStadium, values.selectedPlayers, values.selectedCoach, authContext.state.user.username);
+    props.close();
+    const result = await Api.createTeam(values.teamName, values.selectedStadium, values.selectedPlayers, values.selectedCoach, authContext.state.user.username);
+    props.getTeams();
+  };
 
   return values.initialize ? (
     <div className={classes.root}>
       <h1>Create new Team</h1>
       <div className={classes.formRow}>
         <h3>Enter team name</h3>
-        <input className={classes.input} placeholder="Team name" />
+        <input className={classes.input} placeholder="Team name"  onChange={(e) => setValues({...values, teamName: e.target.value})}/>
       </div>
       <div className={classes.formRow}>
         <h3>Choose players</h3>
@@ -128,7 +140,7 @@ export default function NewTeamForm(props) {
         ))}
       </div>
 
-      <button type="submit" className={classes.submit} onClick={props.close}>
+      <button type="submit" className={classes.submit} onClick={handleSubmit}>
         Submit
       </button>
     </div >

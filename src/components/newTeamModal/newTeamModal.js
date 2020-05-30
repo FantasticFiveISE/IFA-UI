@@ -36,7 +36,7 @@ export default function CreateTeamModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <NewTeamForm close={props.close} />
+      <NewTeamForm getTeams={props.getTeams} close={props.close} />
     </div>
   );
 

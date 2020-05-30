@@ -36,7 +36,7 @@ export default function CreateSeasonModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <NewSeasonForm close={props.close} />
+      <NewSeasonForm getSeasons={props.getSeasons} close={props.close} />
     </div>
   );
 

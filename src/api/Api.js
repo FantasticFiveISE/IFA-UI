@@ -27,7 +27,7 @@ async function postData(url = '', data = {}) {
 
   }
   console.log(response);
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response; // parses JSON response into native JavaScript objects
 }
 
 async function getData(url = '', data = {}) {
@@ -68,14 +68,20 @@ class API {
   // Teams API
   getAllTeams = async () => {
     // return getData(this.ENDPOINT + '/teams');
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(teamsResponse);
-      }, 200);
-    });
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(teamsResponse);
+    //   }, 200);
+    // });
+    
+    return getData(this.ENDPOINT + '/teams');
+      
   };
 
-  createTeam = () => { };
+  createTeam = (teamName, stadium, players, coach, owner) => {
+
+    return postData(this.ENDPOINT + '/teams', { teamName, stadium, players, coach , owner});
+  };
 
   // Leagues API
   getLeagues = async (params) => {
@@ -84,6 +90,12 @@ class API {
     }
   };
   updateLeague = () => { };
+
+
+  createSeason = (leagueName, season, scheduling, winPoints, losePoints,drawPoints) => {
+    console.log(leagueName, season, scheduling, winPoints, losePoints,drawPoints);
+    return postData(this.ENDPOINT + '/leagues', { leagueName, season, scheduling, winPoints , losePoints, drawPoints});
+  };
 
   // Games API
   getRefereeGames = async () => {

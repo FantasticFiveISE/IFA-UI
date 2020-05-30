@@ -28,10 +28,14 @@ export default function NewSeasonForm(props) {
     setValues({ ...values, leagues: leagues, initialize: true });
   };
 
-  const handleSubmit = (event) => {
-    //POST Request
-      //alert(values.season+"   "+values.selectedLeague+"   "+ values.schedulePolicy + "  " + values.win_points + "  " + values.draw_points+ "  " + values.lose_points);
-  };
+  const handleSubmit = async () => {
+      // leagueName, season, scheduling, winPoints, losePoints,drawPoints
+      console.log(values);
+      console.log(values.selectedLeague, values.season, values.schedulePolicy, values.win_points, values.lose_points, values.draw_points);
+      props.close();
+      const result = await Api.createSeason(values.selectedLeague, values.season, values.schedulePolicy, values.win_points, values.lose_points, values.draw_points);
+      props.getSeasons();
+    };
 
   return values.initialize ? (
     <div className={classes.root}>
@@ -102,7 +106,7 @@ export default function NewSeasonForm(props) {
           <input className={classes.ranking} name="ranking" type="number" placeholder="0" min="0" max="10" onChange={(e) => setValues({...values,lose_points:  e.target.value})}/>
         </label>
       </div>
-      <button type="submit" className={classes.submit} onClick={props.close}>
+      <button type="submit" className={classes.submit} onClick={handleSubmit}>
         Submit
       </button>
     </div>
