@@ -65,7 +65,7 @@ export default function () {
 
             </div>
           ) : null}
-        <CreateSeasonModal open={createSeasonOpen} close={handleClose} />
+          <CreateSeasonModal getSeasons={getLeagues} open={createSeasonOpen} close={handleClose} /> 
       </div>
     );
 }

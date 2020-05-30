@@ -84,6 +84,12 @@ class API {
   };
   updateLeague = () => { };
 
+
+  createSeason = (leagueName, season, scheduling, winPoints, losePoints,drawPoints) => {
+    console.log(leagueName, season, scheduling, winPoints, losePoints,drawPoints);
+    return postData(this.ENDPOINT + '/leagues', { leagueName, season, scheduling, winPoints , losePoints, drawPoints});
+  };
+
   // Games API
   getRefereeGames = async () => {
     return getData(this.ENDPOINT + '/games');
