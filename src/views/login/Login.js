@@ -23,6 +23,7 @@ export default function Login() {
     // TODO: validate inputes
     event.preventDefault();
     API.login(user, password)
+      .then(res => res.json())
       .then((user) => {
         console.log("user", JSON.stringify(user));
         authContext.setState({ user: user, isLoading: false });

@@ -55,7 +55,7 @@ export default function () {
               teamName={team.teamName}
               teamStatus={team.teamStatus}
               players={team.players}
-              managers={team.managers}
+              managers={team.owners}
               stadium={team.stadium}
             />
           );
@@ -69,7 +69,7 @@ export default function () {
           </Fab>
         </div>
       ) : null}
-      <CreateTeamModal open={createTeamOpen} close={handleClose} />
+      <CreateTeamModal getTeams={getTeams} open={createTeamOpen} close={handleClose} />
     </div>
   );
 }

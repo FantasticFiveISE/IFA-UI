@@ -80,8 +80,11 @@ export default function NewTeamForm(props) {
     }
   };
 
-  const handleSubmit = () =>{
-    Api.createTeam(values.teamName, values.selectedStadium, values.selectedPlayers, values.selectedCoach, authContext.state.user.username);
+  const handleSubmit = async () =>{
+    console.log(values.teamName, values.selectedStadium, values.selectedPlayers, values.selectedCoach, authContext.state.user.username);
+    props.close();
+    const result = await Api.createTeam(values.teamName, values.selectedStadium, values.selectedPlayers, values.selectedCoach, authContext.state.user.username);
+    props.getTeams();
   };
 
   return values.initialize ? (
@@ -89,7 +92,7 @@ export default function NewTeamForm(props) {
       <h1>Create new Team</h1>
       <div className={classes.formRow}>
         <h3>Enter team name</h3>
-        <input className={classes.input} placeholder="Team name" />
+        <input className={classes.input} placeholder="Team name"  onChange={(e) => setValues({...values, teamName: e.target.value})}/>
       </div>
       <div className={classes.formRow}>
         <h3>Choose players</h3>
@@ -137,7 +140,7 @@ export default function NewTeamForm(props) {
         ))}
       </div>
 
-      <button type="submit" className={classes.submit} onClick={handleSubmit,props.close}>
+      <button type="submit" className={classes.submit} onClick={handleSubmit}>
         Submit
       </button>
     </div >

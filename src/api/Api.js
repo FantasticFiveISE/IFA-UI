@@ -27,7 +27,7 @@ async function postData(url = '', data = {}) {
 
   }
   console.log(response);
-  return response.json(); // parses JSON response into native JavaScript objects
+  return response; // parses JSON response into native JavaScript objects
 }
 
 async function getData(url = '', data = {}) {
@@ -78,9 +78,9 @@ class API {
       
   };
 
-  createTeam = (teamName, field, players, coach, owner) => {
+  createTeam = (teamName, stadium, players, coach, owner) => {
 
-    return postData(this.ENDPOINT + '/teams', { teamName, field, players, coach , owner});
+    return postData(this.ENDPOINT + '/teams', { teamName, stadium, players, coach , owner});
   };
 
   // Leagues API
