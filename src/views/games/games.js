@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import API from "../../api/mock/Api";
+import API from "../../api/Api";
 import Game from "../../components/game/game";
 import { AuthContext } from "../../providers/authProvider";
 import useStyles from "./gamesStyle";

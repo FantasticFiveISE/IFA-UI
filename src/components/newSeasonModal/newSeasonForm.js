@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useStyles } from "../newTeamModal/useStyles";
-import Api from "../../api/mock/Api";
+import Api from "../../api/Api";
 
 export default function NewSeasonForm(props) {
   const classes = useStyles();
@@ -24,37 +24,13 @@ export default function NewSeasonForm(props) {
     const [leagues] = await Promise.all([
       Api.getLeagues({ ...values, available: true }),
     ]);
-    //console.log(leagues);
-
-    //console.log(leagues.leagueName);
+    
     setValues({ ...values, leagues: leagues, initialize: true });
-    //console.log(values.leagues);
   };
 
-  const handleSeasonsChange = (event) => {
-    const league = event.target.value;
-    //console.log(values.selectedLeagues);
-    if (values.selectedLeagues && values.selectedLeagues.indexOf(league) >= 0) {
-   //
-    } else {
-      setValues({
-        ...values,
-        selectedLeague:  league,
-      });
-    }
-    //(values.selectedLeagues);
-
-  };
-
-  const handlePolicyChange = (event) => {
-    const policy = event.target.value;
-    setValues({
-        ...values,
-        schedulePolicy: policy,
-        
-      });
-      //console.log(values.schedulePolicy);
-
+  const handleSubmit = (event) => {
+    //POST Request
+      //alert(values.season+"   "+values.selectedLeague+"   "+ values.schedulePolicy + "  " + values.win_points + "  " + values.draw_points+ "  " + values.lose_points);
   };
 
   return values.initialize ? (
@@ -66,21 +42,22 @@ export default function NewSeasonForm(props) {
       </div>
       <div className={classes.formRow}>
         <h3>Choose league</h3>
-        {values.leagues.map((league) => (
-          <label key={league} className={classes.checkbox}>
+        {values.leagues.map((league,index) => (
+          <label key={index} className={classes.checkbox}>
             <input
               type="radio"
-              id={league}
-              value={league}
-              onClick={handleSeasonsChange}
+              key={index}
+              value={league.leagueName}
+              // onClick={handleSeasonsChange}
+              onChange={(e) => setValues({ ...values, selectedLeague: e.target.value })}
               name="leagues"
               required
             />
-            <p className={classes.checkboxLabel}>{league}</p>
+            <p className={classes.checkboxLabel}>{league.leagueName}</p>
           </label>
         ))}
       </div>
-      <div className={classes.formRow} onChange={handlePolicyChange}>
+      <div className={classes.formRow}  onChange={(e) => setValues({ ...values, schedulePolicy: e.target.value })}>
         <h4>Choose schedule game policy for this season:</h4>
         <label className={classes.checkbox}>
           <input

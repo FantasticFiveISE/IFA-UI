@@ -47,11 +47,11 @@ export default function NewGameEventForm(props) {
           <option value="Goal">Goal</option>
           <option value="Offside">Offside</option>
           <option value="Foul">Foul</option>
-          <option value="Red Card">Red Card</option>
-          <option value="Yellow Card">Yellow Card</option>
+          <option value="Red_card">Red Card</option>
+          <option value="Yellow_card">Yellow Card</option>
           <option value="Injury">Injury</option>
-          <option value="PlayerIn">Player In</option>
-          <option value="PlayerOut">Player Out</option>
+          <option value="Player_In">Player In</option>
+          <option value="Player_Out">Player Out</option>
 
         </select>
       </div>

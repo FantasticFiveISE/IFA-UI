@@ -21,9 +21,32 @@ async function postData(url = '', data = {}) {
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data) // body data type must match "Content-Type" header
   });
+  if(!response.ok){
+    throw new Error(response.json().status);
+    // return new Error("invalid info: please check userName or password!");
+
+  }
+  console.log(response);
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
+async function getData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    // body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return response.json(); // parses JSON response into native JavaScript objects
+}
 class API {
   ENDPOINT = "http://localhost:8080";
 
@@ -44,104 +67,57 @@ class API {
 
   // Teams API
   getAllTeams = async () => {
+    // return getData(this.ENDPOINT + '/teams');
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(teamsResponse);
       }, 200);
     });
-
-
   };
 
   createTeam = () => { };
 
   // Leagues API
   getLeagues = async (params) => {
-    // Need to filter by params in better way
     if (params.available) {
-      //fecth("get", ENDPOINT + /players?available=true);
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(leaguesResponse);
-        }, 200);
-      });
-    } else {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(leaguesResponse);
-        }, 200);
-      });
+    return getData(this.ENDPOINT + '/leagues?available=true');
     }
   };
   updateLeague = () => { };
 
   // Games API
   getRefereeGames = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(gameResponse);
-      }, 200);
-    });
+    return getData(this.ENDPOINT + '/games');
+
   };
   updateGame = () => { };
 
   // players Api
   getPlayers = async (params) => {
-    // Need to filter by params in better way
     if (params.available) {
-      //fecth("get", ENDPOINT + /players?available=true);
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(playersResponse);
-        }, 200);
-      });
-    } else {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(playersResponse);
-        }, 200);
-      });
+      return getData(this.ENDPOINT + '/players?available=true');
     }
+
   };
 
-  followGame = async (params) => {
-
+  followGame = async (username, gameId) => {
+    return postData(this.ENDPOINT + '/games/follow', { gameId, username });
   }
 
   // GET /coaches?available=true
   // GET /stadium?available=true
 
   getCoaches = async (params) => {
-    // Need to filter by params in better way
     if (params.available) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(coachesResponse);
-        }, 200);
-      });
-    } else {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(coachesResponse);
-        }, 200);
-      });
+      return getData(this.ENDPOINT + '/coaches?available=true');
+
     }
   };
 
   getFields = async (params) => {
-    // Need to filter by params in better way
     if (params.available) {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(fieldsResponse);
-        }, 200);
-      });
-    } else {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(fieldsResponse);
-        }, 200);
-      });
+      return getData(this.ENDPOINT + '/fields?available=true');
+
     }
   };
 
