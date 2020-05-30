@@ -118,16 +118,6 @@ export default function Game(props) {
                   ))}
                 </ul>
               </div>
-              <div className={classes.catagory}>
-                <EventNoteIcon />
-                <ul className={classes.catagoryUl}>
-                  {events && events.map((event) => (
-                    <li key={event.id} className={classes.catagoryLi}>
-                      {event.split('\n').map((line, i) => <p className={i===0 && classes.eventFirstLine}>{line}</p>)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
             <div className={classes.contentCol}>
               <div className={classes.catagory}>
@@ -143,6 +133,16 @@ export default function Game(props) {
                 <p className={classes.catagoryUl}>{props.gameScore}</p>
               </div>
             </div>
+          </div>
+          <div className={classes.events}>
+            <EventNoteIcon />
+            <ul className={classes.catagoryUl}>
+              {events && events.map((event) => (
+                <li key={event.id} className={classes.catagoryLi}>
+                  {event.split('\n').map((line, i) => <p className={i === 0 && classes.eventFirstLine}>{line}</p>)}
+                </li>
+              ))}
+            </ul>
           </div>
         </CardContent>
         {authContext.state.user !== null && <Menu

@@ -2,17 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import API from "../../api/Api";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import { makeStyles } from "@material-ui/core/styles";
 import CreateSeasonModal from "../../components/newSeasonModal/newSeasonModal";
 import { AuthContext } from "../../providers/authProvider";
 import Season from "../../components/season/season"
-const useStyles = makeStyles((theme) => ({
-  createTeam: {
-    position: "fixed",
-    bottom: "10%",
-    right: "10%",
-  },
-}));
+import { useStyles } from "./useStyles";
+
 
 export default function () {
   const classes = useStyles();
@@ -22,9 +16,9 @@ export default function () {
   const [createSeasonOpen, setOpen] = useState(false);
 
   const getLeagues = async () => {
-    const response = await API.getLeagues({available: true});
+    const response = await API.getLeagues({ available: true });
     setLeagues(response);
-    };
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -42,33 +36,36 @@ export default function () {
     <div>in Teams</div>
   ) : (
       <div className={classes.root}>
-        {leagues.map((league, index) => {
-          console.log(league);
-          return (
-            <Season
-              key={index}
-              begin={league.begin}
-              leagueName={league.leagueName}
-              rankingMethod={league.rankingMethod}
-              referees={league.referees}
-              schedulingMethod={league.schedulingMethod}
-              season={league.season}
-              teamsInLeaguePerSeason={league.teamsInLeaguePerSeason}
-              index ={index}
-            />
-          );
-        })}
+        <ul className={classes.teams}>
+          {leagues.map((league, index) => {
+            console.log(league);
+            return (
+              <Season
+                key={index}
+                begin={league.begin}
+                leagueName={league.leagueName}
+                rankingMethod={league.rankingMethod}
+                referees={league.referees}
+                schedulingMethod={league.schedulingMethod}
+                season={league.season}
+                teamsInLeaguePerSeason={league.teamsInLeaguePerSeason}
+                index={index}
+              />
+            );
+          })}
+          </ul>
+
         {/* Change to ASSOCIATION_AGENT */}
-          {(authContext.state.user &&
+        {(authContext.state.user &&
           authContext.state.user.roles.indexOf("FAN") >= 0) ? (
             <div className={classes.createTeam}>
               <Fab color="secondary" aria-label="add" onClick={handleOpen}>
                 <AddIcon />
-              </Fab> 
+              </Fab>
 
             </div>
           ) : null}
-          <CreateSeasonModal open={createSeasonOpen} close={handleClose} /> 
+        <CreateSeasonModal open={createSeasonOpen} close={handleClose} />
       </div>
     );
 }

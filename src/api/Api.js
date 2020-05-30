@@ -8,7 +8,7 @@ import gameResponse from "./mock/resources/gameResponse";
 
 async function postData(url = '', data = {}) {
   // Default options are marked with *
-  const response = await fetch(url, {
+  return fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -20,14 +20,7 @@ async function postData(url = '', data = {}) {
     redirect: 'follow', // manual, *follow, error
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(data) // body data type must match "Content-Type" header
-  });
-  if(!response.ok){
-    throw new Error(response.json().status);
-    // return new Error("invalid info: please check userName or password!");
-
-  }
-  console.log(response);
-  return response; // parses JSON response into native JavaScript objects
+  }).then(response => { if(!response.ok)throw new Error('Something went wrong.'); return response; });
 }
 
 async function getData(url = '', data = {}) {
@@ -73,20 +66,20 @@ class API {
     //     resolve(teamsResponse);
     //   }, 200);
     // });
-    
+
     return getData(this.ENDPOINT + '/teams');
-      
+
   };
 
   createTeam = (teamName, stadium, players, coach, owner) => {
 
-    return postData(this.ENDPOINT + '/teams', { teamName, stadium, players, coach , owner});
+    return postData(this.ENDPOINT + '/teams', { teamName, stadium, players, coach, owner });
   };
 
   // Leagues API
   getLeagues = async (params) => {
     if (params.available) {
-    return getData(this.ENDPOINT + '/leagues?available=true');
+      return getData(this.ENDPOINT + '/leagues?available=true');
     }
   };
   updateLeague = () => { };

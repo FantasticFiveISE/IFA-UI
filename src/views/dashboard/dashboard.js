@@ -19,6 +19,8 @@ export default function Dashboard() {
   const classes = useStyles();
   const authContext = useContext(AuthContext);
 
+
+  console.log('user', authContext.state.user);
   return (
     <div className={classes.root}>
       <Router history={hist}>
