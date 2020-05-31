@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   loggedin: {
     right: "5%",
-    position: "absolute",
+    position: "fixed",
     marginTop: "1%",
     width: "266px",
   },

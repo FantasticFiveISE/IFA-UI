@@ -39,7 +39,7 @@ export default makeStyles((theme) => ({
   },
   login: {
     right: 0,
-    position: "absolute",
+    position: 'fixed',
     margin: "1% 4% 0 0",
   },
 }));
