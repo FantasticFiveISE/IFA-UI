@@ -1,10 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import Response from "../../api/mock/resources/loginResponse";
 import { AuthContext } from "../../providers/authProvider";
 import { useHistory } from "react-router-dom";
-import API from "../../api/mock/Api";
+import API from "../../api/Api";
 import MuiAlert from '@material-ui/lab/Alert';
 
 
@@ -13,31 +12,29 @@ function Alert(props) {
 }
 export default function Login() {
   const authContext = useContext(AuthContext);
+
   const history = useHistory(); // using the
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
-  const [error, setError] = useState("");
 
   // validation of the form + submit is pressed
   function handleSubmit(event) {
     // TODO: validate inputes
-    event.preventDefault();    
-    API.login(Response.username, Response.password)
+    event.preventDefault();
+    API.login(user, password)
+      .then(res => {
+        return res.json()
+      })
       .then((user) => {
-        authContext.setState({ isLoading: true });
-        console.log("user", JSON.stringify(user));
-        authContext.setState({ user: user, isLoading: false });
-        history.push("/");
-        setError(false);
-
+        authContext.setState({user: user, isLoading: false });
+        history.push('/');
+        return user;
       })
       .catch((error) => {// TODO: Handle errors
-        console.log(error);  
-        setError(true);
-        // authContext.setState({ error: error, isLoading: false });
+        authContext.setState({...authContext.state, isLoading: false, error: true, errorMessage: error });
       }
-      ); 
-
+      );
+    authContext.setState({ isLoading: true });
   }
 
   return (
@@ -62,7 +59,7 @@ export default function Login() {
             required
           />
         </FormGroup>
-        {error === true ? (
+        {authContext.state.error === true ? (
           <Alert severity="error">Invalid username or password</Alert>
         ) : null}
         <Button block bsSize="large" type="submit">

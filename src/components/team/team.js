@@ -2,15 +2,16 @@ import React, { useContext } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
 import WorkIcon from "@material-ui/icons/Work";
 import PlaceIcon from "@material-ui/icons/Place";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import useStyles from "./teamStyle";
-import { AuthContext } from "../../providers/authProvider";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import './team.css';
 
 export default function Team(props) {
   const classes = useStyles();
@@ -33,10 +34,8 @@ export default function Team(props) {
   return (
     <Card className={classes.root}>
       <CardHeader
-        action={
-          <IconButton aria-label="settings" onClick={handleClick}>
-            <MoreVertIcon />
-          </IconButton>
+        classes={
+          { subheader: props.teamStatus === 'Open' ? classes.subtitleOpen : props.teamStatus === 'Pending' ? classes.subtitlePending : classes.subtitleClose }
         }
         title={props.teamName}
         subheader={props.teamStatus}
@@ -46,7 +45,7 @@ export default function Team(props) {
         <div className={classes.contentContainer}>
           <div className={classes.contentCol}>
             <div className={classes.catagory}>
-              <DirectionsRunIcon />
+              <DirectionsRunIcon fontSize="large" />
               <ul className={classes.catagoryUl}>
                 {props.players.map((player) => (
                   <li key={player.name} className={classes.catagoryLi}>
@@ -56,19 +55,21 @@ export default function Team(props) {
               </ul>
             </div>
             <div className={classes.catagory}>
-              <WorkIcon />
-              <ul className={classes.catagoryUl}>
+              <WorkIcon fontSize="large" />
+              <List className={classes.catagoryUl}>
                 {props.managers.map((manager) => (
-                  <li key={manager.name} className={classes.catagoryLi}>
-                    {manager.name}
-                  </li>
+                  <ListItem key={manager.name} className={classes.catagoryLi}>
+                    <ListItemText>
+                      {manager.name}
+                    </ListItemText>
+                  </ListItem>
                 ))}
-              </ul>
+              </List>
             </div>
           </div>
           <div className={classes.contentCol}>
             <div className={classes.catagory}>
-              <PlaceIcon />
+              <PlaceIcon fontSize="large" />
               <p className={classes.catagoryUl}>{props.stadium.fieldName}</p>
             </div>
           </div>

@@ -29,7 +29,6 @@ export const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexFlow: "row",
     marginTop: "0",
-    width: "27%",
   },
   checkboxLabel: {
     margin: "-1px 0 0 5px",
@@ -45,5 +44,27 @@ export const useStyles = makeStyles((theme) => ({
     width:"100px",
     border: "0",
     borderBottom: "1px solid black",
-  } 
+  } ,
+  list: {
+    width: '100%',
+    maxWidth: 360,
+    position: 'relative',
+    overflow: 'auto',
+    overflowX: 'hidden',
+    maxHeight: '120px',
+    listStyleType: "none",
+    padding: "0",
+    margin: "1% 0 0 4%",
+  },
+  listContainer: {
+    width: '100%',
+    maxWidth: 360,
+    position: 'relative',
+    overflow: 'auto',
+    overflowX: 'hidden',
+    maxHeight: '500px',
+    listStyleType: "none",
+    padding: "0",
+    margin: "1% 0 0 4%",
+  }
 }));

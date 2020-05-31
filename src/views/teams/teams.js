@@ -1,19 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import API from "../../api/mock/Api";
+import API from "../../api/Api";
 import Team from "../../components/team/team";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import { makeStyles } from "@material-ui/core/styles";
 import CreateTeamModal from "../../components/newTeamModal/newTeamModal";
 import { AuthContext } from "../../providers/authProvider";
-
-const useStyles = makeStyles((theme) => ({
-  createTeam: {
-    position: "fixed",
-    bottom: "10%",
-    right: "10%",
-  },
-}));
+import { useStyles } from "./useStyles";
 
 export default function () {
   const classes = useStyles();
@@ -24,6 +16,7 @@ export default function () {
 
   const getTeams = async () => {
     const response = await API.getAllTeams();
+    console.log(response);
     setTeams(response);
   };
 
@@ -42,31 +35,30 @@ export default function () {
   return teams.length < 0 ? (
     <div>in Teams</div>
   ) : (
-    <div>
-      <ul>
+    <div className={classes.root}>
+      <ul className={classes.teams}>
         {teams.map((team) => {
-          console.log(team);
           return (
             <Team
               key={team.teamName}
               teamName={team.teamName}
               teamStatus={team.teamStatus}
               players={team.players}
-              managers={team.managers}
+              managers={team.owners}
               stadium={team.stadium}
             />
           );
         })}
       </ul>
-      {authContext.state.user &&
-      authContext.state.user.roles.indexOf("FAN") >= 0 ? (
+      {(authContext.state.user &&
+      authContext.state.user.roles.indexOf("FAN") >= 0 )? (
         <div className={classes.createTeam}>
           <Fab color="secondary" aria-label="add" onClick={handleOpen}>
             <AddIcon />
           </Fab>
         </div>
       ) : null}
-      <CreateTeamModal open={createTeamOpen} close={handleClose} />
+      <CreateTeamModal getTeams={getTeams} open={createTeamOpen} close={handleClose} />
     </div>
   );
 }
