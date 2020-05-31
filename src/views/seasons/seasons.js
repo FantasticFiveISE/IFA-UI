@@ -57,7 +57,7 @@ export default function () {
 
         {/* Change to ASSOCIATION_AGENT */}
         {(authContext.state.user &&
-          authContext.state.user.roles.indexOf("FAN") >= 0) ? (
+          authContext.state.user.roles.indexOf("ASSOCIATION_AGENT") >= 0) ? (
             <div className={classes.createTeam}>
               <Fab color="secondary" aria-label="add" onClick={handleOpen}>
                 <AddIcon />
